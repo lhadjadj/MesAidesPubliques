@@ -35,4 +35,4 @@ Fournisseur de données :
 Reste à faire : 
 - Afficher les statistiques et l'historique des dossiers de l'entreprise
 - Simuler l'éligibilité de l'entreprise à la règle du Minimis pour les aides d'Etat
-- Recueillir le consentement de l'entreprise pour autoriser la ré-utilisation les données publiques par l'administration
+- Recueillir le consentement de l'entreprise pour autoriser la ré-utilisation des données publiques par l'administration
