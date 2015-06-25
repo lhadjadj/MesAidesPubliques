@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+/************************************ initialialisation par defaut ****************************/
+/************* References *********************************************************************/
+/* http://fr.wikipedia.org/wiki/Graisse_%28typographie%29                                     */
+/* https://everythingfonts.com/                                                               */
+
+@font-face {
+    font-family:'pAaargh';
+	src: local('Aaargh'),
+         url('/fonts/Aaargh.woff2') format('woff2'),
+         url('/fonts/Aaargh.woff') format('woff'),
+         url('/fonts/Aaargh.ttf') format('truetype');
+    font-weight:400;
+    font-style:normal;
+}
+.Aaargh {font-family:'pAaargh';} 
+
+@font-face {
+    font-family:'pComic';
+	src: local('Comic Sans MS'),
+         url('/fonts/Comic.woff2') format('woff2'),
+         url('/fonts/Comic.woff') format('woff'),
+         url('/fonts/Comic.ttf') format('truetype');
+    font-weight:400;
+    font-style:normal;
+}
+
+@font-face {
+    font-family:'pComic_Bold';
+	src: local('Comic Sans MS'),
+         url('/fonts/ComicBold.woff2') format('woff2'),
+         url('/fonts/ComicBold.woff') format('woff'),
+         url('/fonts/ComicBold.ttf') format('truetype');
+    font-weight:700;
+    font-style:normal;
+}
+.Comic {font-family:'pComic';} 
+.Comic_Bold {font-family:'pComic_Bold';}
+
+
+@font-face {
+    font-family:'pDensiaSans';
+	src: local('Densia Sans'),
+         url('/fonts/DensiaSans.woff2') format('woff2'),
+         url('/fonts/DensiaSans.woff') format('woff'),
+         url('/fonts/DensiaSans.ttf') format('truetype');
+    font-weight:400;
+    font-style:normal;
+}
+.DensiaSans {font-family:'pDensiaSans';} 
+
+/*********************************** Fin de l'initialisation ***********************************/

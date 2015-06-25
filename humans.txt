@@ -1,0 +1,46 @@
+# humanstxt.org/
+# The humans responsible & technology colophon
+
+/* TEAM */
+	Web developer:Laurent HADJADJ
+	Site: https://mesaidespubliques.fr/
+	Contact: laurent.hadjadj [at] asp-public [point] fr
+	From: Paris, France
+
+	UI developer: Laurent HADJADJ
+	From:Paris, France
+
+	One eyed illustrator: Laurent HADJADJ
+	From:Paris, France
+
+	Web designer: Laurent HADJADJ
+	From:Paris, France
+
+        Fonctionel Analyst : Bruno CLAUDEPIERRE
+	From:Paris, France
+
+        Fonctionnel Expert : Frededric FRADIN
+	From:Rennes, France
+/* THANKS */
+    Humans.txt      : http://humanstxt.org
+    Initializr      : http://www.initializr.com/
+    Html5 Boilerplate: http://html5boilerplate.com
+    Base64Toimage   : http://base64image.org/
+    Images          : http://www.lifeofpix.com/
+                      http://www.gratisography.com/
+                      https://picjumbo.com/
+   Email-Protection : http://www.mailtoencoder.com/
+			
+/* SITE */
+	Last update: 2015/06/19
+	Language: French 
+	Doctype: HTML5
+	IDE: NetBeans, Sublime Text, Notepad++, Gimp, FontForge
+	Licence: Creative Commons - by-nc-sa version 4.0
+	Standards CSS3, HTML5, PHP 5.5
+	Softawre: Nginx, MarionDB, MangoDB, Zurb Foundation 5.5.2
+	Components: jQuery, Modernizr, Normalize
+
+/* REFERENCE */
+	ARIA : http://fr.wikipedia.org/wiki/Accessible_Rich_Internet_Applications
+	     : http://www.lesintegristes.net/2008/12/09/introduction-a-wai-aria-traduction/
