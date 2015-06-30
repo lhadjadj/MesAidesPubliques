@@ -6,7 +6,6 @@ $url_canonical = "/app/consulter/consulter.php";
 $description="Consulter mes Aides Publiques";
 $twitter_domain="En savoir plus sur mes aides";
 $twitter_description="Mes Aides Publiques est un télé-service de simplication administrative.";
-
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -30,6 +29,14 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <?php include_once(dirname(__DIR__).'/block/navbar.php');?>
 
 <section>
+    <?php 
+        if ($traitement['Locale']=1) 
+            { echo '<div id="mainAlert" data-alert class="alert-box warning" tabindex="0" aria-live="assertive" role="dialogalert">
+                    <p id="message" class=Comic">Le hackathon, c\'est fini. On utilise la base de tests locale :)</p>
+                    <button href="#" tabindex="0" class="close" aria-label="Close Alert">&times;</button>
+                    </div>';
+            }
+    ?>
     <div id="mainAlert" data-alert class="alert-box <?php echo $traitement['TypeAlerte']; ?>" tabindex="0" aria-live="assertive"
          role="dialogalert">
         <p id="message" class=Comic"><?php echo $traitement['Message']; ?></p>
