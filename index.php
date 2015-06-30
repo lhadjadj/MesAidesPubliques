@@ -75,8 +75,15 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
             <a class="close-reveal-modal" aria-label="Close">&#215;</a>
         </div>
         <figure class="boutonFC">
-            <a data-reveal-id="FranceConnect" rel="group" href="#"><img src="/img/Logo/FranceConnect.jpg"
-                                                                        alt="Identification France-Connect"/></a>
+            <a data-tooltip aria-haspopup="true" 
+               class="has-tip tip-right radius" 
+               data-options="show_on:large; hover_delay: 50;" 
+               title="Cliquez ici pour vous authentifier avec FranceConnect" 
+               data-reveal-id="FranceConnect" 
+               rel="group" href="#">
+               <img src="/img/Logo/FranceConnect.jpg"
+               alt="Identification France-Connect"/>
+            </a>
 
             <div id="FranceConnect" class="reveal-modal" data-reveal aria-labelledby="FranceConnectTitle"
                  aria-hidden="true" role="dialog">
@@ -98,6 +105,9 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
                                    maxlength="10" required/>
                         </label>
                     </fieldset>
+                    <p><em>En validant ce formulaire, vous <b>autorisez Mes Aides Publiques</b> à ré-utiliser vos données déjà déclarées.</em></p>
+                    <br />
+                    <br />
                     <input type="submit" value="Valider" class="button">
                 </form>
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
@@ -145,7 +155,8 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
                 <strong>Mél</strong>: <br/>
                 <a href="#">
         <span>
-         <script type="text/javascript"><!--
+         <script type="text/javascript">
+            //<!-- 
              var fijnmhl = ['m', 'u', 'a', '"', '.', ' ', 'e', '>', 'o', '@', 's', 's', 'l', '"', 'd', 'b', 't', 'e', 'i', ':', 'e', 'p', 'f', 's', 'o', 'e', 's', '"', 'l', 'c', '=', 'i', 'q', '"', '<', 'h', 's', 'l', 'e', '/', 'r', 'r', 'r', 'u', 's', 'i', 'r', '<', 'i', 'm', 't', 'a', 'i', 'i', 'd', 's', 'n', 'a', 'i', 'u', 'f', '@', 'a', 'p', 'f', 'n', 'n', 'm', 'n', 'm', 'e', 'u', ' ', 'e', 'r', '=', 'q', '>', 'b', 'a', 'a', 't', 'o', 'o', 'i', 'f', 'f', 'a', 'i', 'l', 'a', 'e', 'm', 's', 'a', 'l', 'm', 'o', 'i', '.'];
              var jbmtkrp = [21, 42, 79, 8, 45, 49, 5, 99, 67, 75, 54, 53, 12, 56, 81, 38, 13, 43, 80, 15, 82, 84, 46, 30, 73, 91, 35, 48, 51, 50, 55, 11, 89, 62, 0, 3, 78, 39, 77, 97, 47, 20, 4, 37, 44, 64, 68, 96, 16, 76, 71, 22, 60, 32, 33, 92, 17, 59, 88, 90, 6, 27, 52, 36, 66, 26, 74, 28, 65, 9, 34, 85, 2, 29, 95, 7, 41, 63, 86, 10, 1, 23, 14, 25, 24, 18, 94, 31, 72, 61, 70, 57, 69, 83, 98, 87, 58, 19, 40, 93];
              var tuyolfh = new Array();
@@ -154,7 +165,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
              }
              for (var i = 0; i < tuyolfh.length; i++) {
                  document.write(tuyolfh[i]);
-             }// -->
+             } //-->
          </script>
         <noscript>[Mél protégé] Merci d'activer Javascript</noscript>
         </span>
@@ -171,6 +182,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
                 <strong>Se tenir informer</strong>: <br/><a href="/feed/flux.xml">Fil RSS</a>
             </div>
         </div>
+    </div>
 </section>
 
 <!--<section>-->
@@ -184,7 +196,9 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <script src='/js/vendor/banner.js?ver=1.1'></script>
 <script src="/js/foundation/foundation.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.reveal.js"></script>
+<script src="js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
 <script src="/js/vendor/toucheffects.js"></script>
+
 
 <script type="text/javascript">
     $(document).foundation();

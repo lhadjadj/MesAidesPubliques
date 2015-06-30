@@ -674,6 +674,7 @@ LnBuZ1BLBQYAAAAABgAGAIQBAAD7EAAAAAA=
   <script src="/js/vendor/jquery.js?ver=2.1.4"></script>
   <script src="/js/foundation/foundation.js?ver=5.5.2"></script>
   <script src="/js/foundation/foundation.topbar.js"></script>
+  <script src="js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
   <script src="/js/vendor/toucheffects.js"></script>
   
   <script type="text/javascript">
