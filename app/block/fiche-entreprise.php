@@ -1,8 +1,9 @@
 <?php
 require_once(dirname(dirname(__DIR__))."/lib/Traitement_donnees.class.php");
-$siret = (isset($_POST['siret']) && isset($_POST['email']))?$_POST['siret']:"23350001600040";
-$identiteEntreprise = EntrepriseIdentite($siret);
-?>
+if (isset($_POST['siret']) && isset($_POST['email']))
+    {$identiteEntreprise = EntrepriseIdentite($_POST['siret']);}
+    ?>
+
 <h2>Mon Entreprise</h2>
 <div class="row">
     <div class="small-12 columns">

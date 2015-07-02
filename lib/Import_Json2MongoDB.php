@@ -1,13 +1,19 @@
 <?php
 
-function ImportDoonnees()
+function ImportDonnees()
 {
 // Cette fonction permet de créer une base de données de type MongoDB --> DataSource et une collection --> Dossiers pour les documents de la base 
 // de référence du POR-Bretagne     
-    
+// 
+// Contournement, 
+// l'import type les numerot de Siret en Integer 64 bit, il n'est plus possible de lire la valeur sur un systeme 32 bit, 
+// on ajoute alors un S devant le numero de Siret pour le transformer en String
+// je sais c'est moche mais on fera mieux dans la v2.0
+        
 ini_set('max_execution_time', 300);
 $chemin=str_replace('lib', 'data/', __DIR__);
 $command='mongoimport '
+        . '--drop '
         . '--db DataSource '
         . '--collection Dossiers '
         . '--headerline '
@@ -20,8 +26,11 @@ $command='mongoimport '
 // Initialisation de la connexion
 $m = new MongoClient();
 $nbdossiers=$m->DataSource->Dossiers->count();
-if (isset($nbdossiers) === 0) {exec($command);} 
+if ($nbdossiers === 0) {exec($command);} 
+$nbdossiers=$m->DataSource->Dossiers->count();
+return $nbdossiers;
 }
 
 //Tests
-ImportDoonnees();
+//$tempo=ImportDonnees();
+//var_dump($tempo);

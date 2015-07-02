@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 require_once(dirname(dirname(__DIR__))."/lib/Traitement_donnees.class.php");
 $traitement = TraitementsDonneesPO();
 $titre_page = "Mes Aides publiques - Consulter mes Aides Publiques";
@@ -30,12 +31,14 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 
 <section>
     <?php 
-        if ($traitement['Locale']=1) 
-            { echo '<div id="mainAlert" data-alert class="alert-box warning" tabindex="0" aria-live="assertive" role="dialogalert">
-                    <p id="message" class=Comic">Le hackathon, c\'est fini. On utilise la base de tests locale :)</p>
-                    <button href="#" tabindex="0" class="close" aria-label="Close Alert">&times;</button>
-                    </div>';
-            }
+    // Si je ne suis plus au Hackathon alors j'affiche la banner ci-dessous 
+    if ($_SESSION['hackathon'] == 1) {
+         echo '<div id="mainAlert" data-alert class="alert-box warning" tabindex="0" aria-live="assertive" role="dialogalert">
+                <p id="message" class=Comic">Le hackathon, c\'est fini. On utilise la base de tests locale - :) - avec ' . $traitement['NbDossier'] . ' dossiers</p>
+                <button href="#" tabindex="0" class="close" aria-label="Close Alert">&times;</button>
+              </div>';
+       }
+
     ?>
     <div id="mainAlert" data-alert class="alert-box <?php echo $traitement['TypeAlerte']; ?>" tabindex="0" aria-live="assertive"
          role="dialogalert">
@@ -43,6 +46,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
         <button href="#" tabindex="0" class="close" aria-label="Close Alert">&times;</button>
     </div>
 </section>
+
 <section class="clearfix">
     <div class="large-6 columns" id="fiche-entreprise">
         <?php include_once(dirname(__DIR__).'/block/fiche-entreprise.php');?>
@@ -71,7 +75,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <script src="/js/foundation/foundation.alert.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.accordion.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.reveal.js?ver=5.5.2"></script>
-<script src="js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
+<script src="/js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
 <script src="/js/vendor/toucheffects.js"></script>
 
 <script type="text/javascript">

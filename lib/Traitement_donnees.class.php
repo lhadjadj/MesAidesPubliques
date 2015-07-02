@@ -1,4 +1,5 @@
 <?php
+//session_start(); 
 require_once(__DIR__ . "/Curl.php");
 
 use \Curl\Curl;
@@ -37,7 +38,7 @@ function isValidJson($strJson)
     return array('TypeAlerte' => "$TypeAlerte", 'Message' => "$Message");
 }
 
-function GetData($url,$dataset, $query, $facet, $proxy)
+function GetData($url, $dataset, $query, $facet, $proxy)
 {
 
 //Instanciation de la fonction + paramétres
@@ -62,16 +63,34 @@ function GetData($url,$dataset, $query, $facet, $proxy)
 
 function TraitementsDonneesPO()
 {
+    
+    //Processus : 
+    //              1 - Se connecter à OpendataSoft sur la base PO-bretagne
+    //                  1 - Récupérer depuis l'API le fichier Json pour le numéro de Siret saisie par l'utilisateur
+    //                  2 - Contrôler l'intégrité du fichier Json
+    //                  3 - Parser les données et :
+    //                      1 - Enregistrer les données de l'netreprise si le Siret est nouveau (1 seul numéro de Siret)
+    //                      2 - Enregistrer dans tous les cas les données du projets (n dossier pour un Siret)
+    //              2 - charger la base de tests dans une base monGoDB (DataSource) et une collections Dossiers
+    //              3 - retourner les infirmations sur l'entreprise et les dossiers
+    //              
+    
     //On vérifie que les données sont bien passées, attention avec les certificats auto-signés qui ne fonctionnent pas correctement avec NTLM
-    $siret = (isset($_POST['siret']) && isset($_POST['email']))?$_POST['siret']:"23350001600040";
+    if (!isset($_POST['siret']) && !isset($_POST['email'])) 
+    {
+        return array('TypeAlerte' => "alert radius", 'Message' => "Les données du formulaires sont erronnées." );
+    }
 
-    // récupération des parametres de connexion - n° siret valide : 23350001600040, 38073485500014
+    // récupération des parametres de connexion - n° siret valide : --> vide : 23350001600040, --> ok : 38073485500014
     require_once(str_replace('lib', '/conf/', __DIR__) . "parametres.php");
-
-    $query = "&q=$siret";
+    
+    // fonction de chargement des données en base
+    require_once(__DIR__ . "/Import_Json2MongoDB.php");
+    
+    $query=$_POST['siret'];
     $attention=false;
     
-    // Appel de la fonction de récupération des données
+        // Appel de la fonction de récupération des données
     $parsed_json = GetData($url, $dataset['1'], $query, $facet, $proxy);
 
     if (is_string($parsed_json)) {
@@ -82,37 +101,40 @@ function TraitementsDonneesPO()
                 // on ne peux plus se connecter àla base OpenDataSoft, donc on va utiliser une base locale (fichier json)
                 // le fichier est correct, pas besoin de le vérifier.
                 $attention=true;
+                $ChargementDonnees=ImportDonnees();
                 break;
             default :
                 return array('TypeAlerte' => "alert radius", 'Message' => $parsed_json);
                             }
     }
-    $NombreDossier = count($parsed_json['records']);
-    if ($NombreDossier == 0) {return array('TypeAlerte' => "warning radius", 'Message' => "Aucun dossier trouvé.");}
+    if (isset($attention)==false)
+    {
+        $NombreDossier = count($parsed_json['records']);
+        if ($NombreDossier == 0) {return array('TypeAlerte' => "warning radius", 'Message' => "Aucun dossier trouvé.");}
 
-    // Un seul Siret par entreprise
-    //Premier bloc - identification de l'entreprise
-    $NumSiret = $parsed_json["records"][0]["fields"]["numsiret"];
-    $RaisonSocial = $parsed_json["records"][0]["fields"]["rsocmo"];
-    $NatureActivité = $parsed_json["records"][0]["fields"]["libnaturemo"];
-    $CodeActivité = $parsed_json["records"][0]["fields"]["libcodenafmo"];
-    $AdresseRue = $parsed_json["records"][0]["fields"]["ruemo"];
-    $AdresseCodePostale = $parsed_json["records"][0]["fields"]["codepostalmo"];
-    $AdresseVille = $parsed_json["records"][0]["fields"]["villeresidmo"];
-    $AdresseCodeInsee = $parsed_json["records"][0]["fields"]["codeinseecommunemo"];
-    $AdresseGeoLat = $parsed_json["records"][0]["fields"]["geeoinseemo"][0];
-    $AdresseGeoLong = $parsed_json["records"][0]["fields"]["geeoinseemo"][1];
+        // Un seul Siret par entreprise
+        //Premier bloc - identification de l'entreprise
+        $NumSiret = $parsed_json["records"][0]["fields"]["numsiret"];
+        $RaisonSocial = $parsed_json["records"][0]["fields"]["rsocmo"];
+        $NatureActivité = $parsed_json["records"][0]["fields"]["libnaturemo"];
+        $CodeActivité = $parsed_json["records"][0]["fields"]["libcodenafmo"];
+        $AdresseRue = $parsed_json["records"][0]["fields"]["ruemo"];
+        $AdresseCodePostale = $parsed_json["records"][0]["fields"]["codepostalmo"];
+        $AdresseVille = $parsed_json["records"][0]["fields"]["villeresidmo"];
+        $AdresseCodeInsee = $parsed_json["records"][0]["fields"]["codeinseecommunemo"];
+        $AdresseGeoLat = $parsed_json["records"][0]["fields"]["geeoinseemo"][0];
+        $AdresseGeoLong = $parsed_json["records"][0]["fields"]["geeoinseemo"][1];
 
-    // Initialisation de la connexion
-    $m = new MongoClient();
-    // sélection de la base de données
-    $db = $m->entreprise;
+        // Initialisation de la connexion
+        $m = new MongoClient();
+        // sélection de la base de données
+        $db = $m->entreprise;
 
-    // Sélectionne de la collection Identité de l'entreprise
-    $collectionIdentite = $db->identite;
-    $collectionProjet = $db->projet;
-    // Enregistrement des données dans la collection
-    $entreprise = array(
+        // Sélectionne de la collection Identité de l'entreprise
+        $collectionIdentite = $db->identite;
+        $collectionProjet = $db->projet;
+        // Enregistrement des données dans la collection
+        $entreprise = array(
             'NumeroSiret' => $NumSiret,
             'RaisonSocial' => $RaisonSocial,
             'NatureActivité' => $NatureActivité,
@@ -125,10 +147,10 @@ function TraitementsDonneesPO()
             'AdresseGeoLong' => $AdresseGeoLong
             );
 
-    //Recherche si l'entreprise exsite déjà en base
-    $getIdentite = $collectionIdentite->findOne(array("NumeroSiret" => $NumSiret));
+        //Recherche si l'entreprise exsite déjà en base
+        $getIdentite = $collectionIdentite->findOne(array("NumeroSiret" => $NumSiret));
 
-    if (!is_array($getIdentite)) {
+        if (!is_array($getIdentite)) {
             try {
                 $collectionIdentite->insert($entreprise, array("w" => 1, "j" => true));
             } catch (MongoCursorException $e) {
@@ -136,58 +158,58 @@ function TraitementsDonneesPO()
             }
         }
 
-    // Boucle de récupération des données
-    foreach ($parsed_json["records"] as $proj) {
-      //Deuxième bloc - identification du projet
-       $data = $proj["fields"];
-       $ProjetRegion = isset($data['localibreg']) ? $data['localibreg'] : '';
-       $ProjetCodeRegion = isset($data['locacodreg']) ? $data['locacodreg'] : '';
-       $ProjetDepartement = isset($data['localibdept']) ? $data['localibdept'] : '';
-       $ProjetCodedepartement = isset($data['locacoddept']) ? $data['locacoddept'] : '';
-       $ProjetArrondissement = isset($data['localibardt']) ? $data['localibardt'] : '';
-       $ProjetCodeArrondissement = isset($data['locacodardt']) ? $data['locacodardt'] : '';
-       $ProjetCommune = isset($data['localibcommune']) ? $data['localibcommune'] : '';
-       $ProjetCodeCommune = isset($data['locacodcommune']) ? $data['locacodcommune'] : '';
-       $ProjetCanton = isset($data['localibcanton']) ? $data['localibcanton'] : '';
-       $ProjetCodeCanton = isset($data['locacodcanton']) ? $data['locacodcanton'] : '';
-       $ProjetGeoLong = $proj["geometry"]["coordinates"][0];
-       $ProjetGeoLat = $proj["geometry"]["coordinates"][1];
+        // Boucle de récupération des données
+        foreach ($parsed_json["records"] as $proj) {
+        //Deuxième bloc - identification du projet
+            $data = $proj["fields"];
+            $ProjetRegion = isset($data['localibreg']) ? $data['localibreg'] : '';
+            $ProjetCodeRegion = isset($data['locacodreg']) ? $data['locacodreg'] : '';
+            $ProjetDepartement = isset($data['localibdept']) ? $data['localibdept'] : '';
+            $ProjetCodedepartement = isset($data['locacoddept']) ? $data['locacoddept'] : '';
+            $ProjetArrondissement = isset($data['localibardt']) ? $data['localibardt'] : '';
+            $ProjetCodeArrondissement = isset($data['locacodardt']) ? $data['locacodardt'] : '';
+            $ProjetCommune = isset($data['localibcommune']) ? $data['localibcommune'] : '';
+            $ProjetCodeCommune = isset($data['locacodcommune']) ? $data['locacodcommune'] : '';
+            $ProjetCanton = isset($data['localibcanton']) ? $data['localibcanton'] : '';
+            $ProjetCodeCanton = isset($data['locacodcanton']) ? $data['locacodcanton'] : '';
+            $ProjetGeoLong = $proj["geometry"]["coordinates"][0];
+            $ProjetGeoLat = $proj["geometry"]["coordinates"][1];
+            
+            //Troisième bloc - identification du projet
+            $PO = isset($data['libellefonds']) ? $data['libellefonds'] : '';
+            $Dossier = isset($data['codedossier']) ? $data['codedossier'] : '';
+            $Projet = isset($data['libdossier']) ? $data['libdossier'] : '';
 
-       //Troisième bloc - identification du projet
-        $PO = isset($data['libellefonds']) ? $data['libellefonds'] : '';
-        $Dossier = isset($data['codedossier']) ? $data['codedossier'] : '';
-        $Projet = isset($data['libdossier']) ? $data['libdossier'] : '';
+            //Quatrième bloc - status d'avancement du projet
+            $EtatStatus = isset($data['libstatus']) ? $data['libstatus'] : '';
+            $EtatDossierPaye = isset($data['indicpayedossier']) ? $data['indicpayedossier'] : '';
+            $EtatDossierSolde = isset($data['indicsoldesossier']) ? $data['indicsoldesossier'] : '';
+            $DateDepotDossier = isset($data['dtdepotdoss']) ? $data['dtdepotdoss'] : '';
+            $DateLimiteDebutReal = isset($data['dtlimdebutrealphy']) ? $data['dtlimdebutrealphy'] : '';
+            $DateLimiteFinReal = isset($data['dtlimfinrealphy']) ? $data['dtlimfinrealphy'] : '';
+            $DatePremierComite = isset($data['dtpremiercomite']) ? $data['dtpremiercomite'] : '';
 
-        //Quatrième bloc - status d'avancement du projet
-        $EtatStatus = isset($data['libstatus']) ? $data['libstatus'] : '';
-        $EtatDossierPaye = isset($data['indicpayedossier']) ? $data['indicpayedossier'] : '';
-        $EtatDossierSolde = isset($data['indicsoldesossier']) ? $data['indicsoldesossier'] : '';
-        $DateDepotDossier = isset($data['dtdepotdoss']) ? $data['dtdepotdoss'] : '';
-        $DateLimiteDebutReal = isset($data['dtlimdebutrealphy']) ? $data['dtlimdebutrealphy'] : '';
-        $DateLimiteFinReal = isset($data['dtlimfinrealphy']) ? $data['dtlimfinrealphy'] : '';
-        $DatePremierComite = isset($data['dtpremiercomite']) ? $data['dtpremiercomite'] : '';
+            //Cinquieme bloc - Montnantw financier
+            $MontantGlobal = isset($data['mntcoutglobprojet']) ? $data['mntcoutglobprojet'] : '';
+            $DepenseEligibleProgramme = isset($data['derpfvctoteligprogmt']) ? $data['derpfvctoteligprogmt'] : '';
+            $DepenseTotalProgrammeUE = isset($data['derpfvtotproguemt']) ? $data['derpfvtotproguemt'] : '';
+            $DepenseTotalProgrammeEtat = isset($data['derpfvtotprogetatmt']) ? $data['derpfvtotprogetatmt'] : '';
+            $DepenseTotalProgrammeRegion = isset($data['derpfvtotprogregionmt']) ? $data['derpfvtotprogregionmt'] : '';
+            $DepenseTotalProgrammeDepartement = isset($data['derpfvtotprogdeptmt']) ? $data['derpfvtotprogdeptmt'] : '';
+            $DepenseTotalProgrammeAutrePublic = isset($data['derpfvtotprogapmt']) ? $data['derpfvtotprogapmt'] : '';
+            $DepenseTotalProgrammeCperEtat = isset($data['derpfvtotprogetatcper']) ? $data['derpfvtotprogetatcper'] : '';
+            $DepenseTotalProgrammeCperRegion = isset($data['derpfvtotprogregioncper']) ? $data['derpfvtotprogregioncper'] : '';
+            $PaiementTotalUE = isset($data['totpayeuemt']) ? $data['totpayeuemt'] : '';
+            $PaiementTotalEtat = isset($data['totpayeetatmt']) ? $data['totpayeetatmt'] : '';
+            $PaiementTotalRegion = isset($data['totpayeregionmt']) ? $data['totpayeregionmt'] : '';
+            $PaiementTotalDepartement = isset($data['totpayedeptmt']) ? $data['totpayedeptmt'] : '';
+            $PaiementTotalAutrePublic = isset($data['totpayeapmt']) ? $data['totpayeapmt'] : '';
+            $PaiementTotalPrive = isset($data['totpayeprivmt']) ? $data['totpayeprivmt'] : '';
+            $PaiementTotal = isset($data['totpayemomt']) ? $data['totpayemomt'] : '';
+            $PaiementTotalValideAC = isset($data['totaldepretvalidac']) ? $data['totaldepretvalidac'] : '';
 
-        //Cinquieme bloc - Montnantw financier
-        $MontantGlobal = isset($data['mntcoutglobprojet']) ? $data['mntcoutglobprojet'] : '';
-        $DepenseEligibleProgramme = isset($data['derpfvctoteligprogmt']) ? $data['derpfvctoteligprogmt'] : '';
-        $DepenseTotalProgrammeUE = isset($data['derpfvtotproguemt']) ? $data['derpfvtotproguemt'] : '';
-        $DepenseTotalProgrammeEtat = isset($data['derpfvtotprogetatmt']) ? $data['derpfvtotprogetatmt'] : '';
-        $DepenseTotalProgrammeRegion = isset($data['derpfvtotprogregionmt']) ? $data['derpfvtotprogregionmt'] : '';
-        $DepenseTotalProgrammeDepartement = isset($data['derpfvtotprogdeptmt']) ? $data['derpfvtotprogdeptmt'] : '';
-        $DepenseTotalProgrammeAutrePublic = isset($data['derpfvtotprogapmt']) ? $data['derpfvtotprogapmt'] : '';
-        $DepenseTotalProgrammeCperEtat = isset($data['derpfvtotprogetatcper']) ? $data['derpfvtotprogetatcper'] : '';
-        $DepenseTotalProgrammeCperRegion = isset($data['derpfvtotprogregioncper']) ? $data['derpfvtotprogregioncper'] : '';
-        $PaiementTotalUE = isset($data['totpayeuemt']) ? $data['totpayeuemt'] : '';
-        $PaiementTotalEtat = isset($data['totpayeetatmt']) ? $data['totpayeetatmt'] : '';
-        $PaiementTotalRegion = isset($data['totpayeregionmt']) ? $data['totpayeregionmt'] : '';
-        $PaiementTotalDepartement = isset($data['totpayedeptmt']) ? $data['totpayedeptmt'] : '';
-        $PaiementTotalAutrePublic = isset($data['totpayeapmt']) ? $data['totpayeapmt'] : '';
-        $PaiementTotalPrive = isset($data['totpayeprivmt']) ? $data['totpayeprivmt'] : '';
-        $PaiementTotal = isset($data['totpayemomt']) ? $data['totpayemomt'] : '';
-        $PaiementTotalValideAC = isset($data['totaldepretvalidac']) ? $data['totaldepretvalidac'] : '';
-
-        //on défini la liste des données de la collection Projet
-        $projet = array(
+            //on défini la liste des données de la collection Projet
+            $projet = array(
                 'NumeroSiret' => $NumSiret,
                 'ProjetRegion' => $ProjetRegion,
                 'ProjetCodeRegion' => $ProjetCodeRegion,
@@ -228,7 +250,7 @@ function TraitementsDonneesPO()
                 'PaiementTotalPrive' => $PaiementTotalPrive,
                 'PaiementTotal' => $PaiementTotal,
                 'PaiementTotalValideAC' => $PaiementTotalValideAC
-            );
+                );
 
             //on fait une recherche dans la base locale, si le numero de siret n'existe pas alors on enregistre toutes les données
             $getProjet = $collectionProjet->findOne(array('NumeroSiret' => $NumSiret, 'Dossier' => $Dossier));
@@ -239,17 +261,20 @@ function TraitementsDonneesPO()
                 } catch (MongoCursorException $e) {
                     return array('TypeAlerte' => "alert radius", 'Message' => $e->getMessage());
                 }
-                                        }
+            }
         }
-
-        // Les données ont été entregistré dans la base mongoDB. on rend la main à la vue
-        // Je tests si on est sur la base locale ou pas et je renvoie un message à la page pour afficher les bons messages 
-        if ($attention) {
-            return array('TypeAlerte' => "success radius", 'Message' => "Les informations de votre entreprise ont été retrouvées.", 'Locale' => 1);
-        }
-        else 
+    }
+     // Les données ont été entregistré dans la base mongoDB. on rend la main à la vue
+     // Je tests si on est sur la base locale ou pas et je renvoie un message à la page pour afficher les bons messages 'Locale' => 1
+    if ($attention) 
         {
-            return array('TypeAlerte' => "success radius", 'Message' => "Les informations de votre entreprise ont été retrouvées.", 'Locale' => 0);
+        if (!$_SESSION['hackathon']){$_SESSION['hackathon'] = 1;}
+        return array('TypeAlerte' => "success radius", 'Message' => "Les informations de votre entreprise ont été retrouvées.", 'NbDossier' =>$ChargementDonnees);
+        }
+    else 
+        {
+        if (!$_SESSION['hackathon']){$_SESSION['hackathon'] = 0;}
+        return array('TypeAlerte' => "success radius", 'Message' => "Les informations de votre entreprise ont été retrouvées." );
         }
 }
 
@@ -257,21 +282,35 @@ function EntrepriseIdentite($NumeroSiret)
 {
     // Initialisation de la connexion
     $m = new MongoClient();
-    return  $m->entreprise->identite->findOne(array("NumeroSiret" => $NumeroSiret));
+    if ($_SESSION['hackathon'] == 0) 
+        {return  $m->entreprise->identite->findOne(array("NumeroSiret" => $NumeroSiret));}
+    else
+        {
+        return  $m->DataSource->Dossiers->findOne(array("NumeroSiret" => S.$NumeroSiret));
+        }
 }
 
 function EntrepriseProjet($NumeroSiret)
 {
     // Initialisation de la connexion
     $m = new MongoClient();
-    return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O" ));
+    if ($_SESSION['hackathon'] == 0) 
+        {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O" ));}
+    else
+        {
+        return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O" ));
+        }
 }
 
 function EntrepriseStatistique($NumeroSiret)
 {
-// todo
+
 $m = new MongoClient();
-return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));
+//Todo
+if ($_SESSION['hackathon'] == 0) 
+    {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));}
+else
+    {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));}
 }
 
 function EntrepriseHistorique($NumeroSiret)

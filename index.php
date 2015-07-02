@@ -196,7 +196,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <script src='/js/vendor/banner.js?ver=1.1'></script>
 <script src="/js/foundation/foundation.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.reveal.js"></script>
-<script src="js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
+<script src="/js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
 <script src="/js/vendor/toucheffects.js"></script>
 
 

@@ -31,6 +31,7 @@
             <p class="lead">Une idée simple, pour un service simple.</p>
             <p class="lead">Avec mes Aides Publiques.</p>
             <a href="/" class="secondary button">Se déconnecter</a>
+            <?php session_destroy(); ?>
             <a class="close-reveal-modal" aria-label="Close">&#215;</a>
           </div>
       </li>
