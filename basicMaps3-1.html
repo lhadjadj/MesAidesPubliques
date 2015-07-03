@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?language=fr&v=3.exp&region=FR&libraries=places&key=AIzaSyDwTjAxG6Ee21ORCMnwE7G1Yxqdl7HqNK0"></script>
+	<script type="text/javascript">
+		// init map & components on document ready
+		$('document').ready(function(){
+			initialize();
+			loadAutocompletion();
+
+			// binding button click to get maps predictions from query
+			$('#searchButton').on('click', function(){
+				getPredictions($('#search').val());
+			});
+
+			// get prediction from a list item ul/li
+			$('#predictList').on('click','li',function(event){
+				getPredictions($(this).text());
+			})
+		});
+
+			// default vars
+			var defaultLocation = new google.maps.LatLng(48.8534100, 2.3488000);
+			var autocomplete, autocompleteOptions, map, mapOptions, currentBounds, service;
+			var markers = [];
+
+			// init basic maps
+			function initialize(){
+				mapOptions = {
+					center: defaultLocation,
+					zoom: 12
+				};
+				
+				// map & controls declaration
+				map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+				map.controls[google.maps.ControlPosition.TOP_LEFT].push($('#searchbox')[0]);
+				map.controls[google.maps.ControlPosition.RIGHT_CENTER].push($('#predictbox')[0]);
+				google.maps.event.addListener(map,'bounds_changed', function(){
+					autocomplete.setBounds(map.getBounds());
+				});
+			}
+
+			// autocompletion component loading
+			function loadAutocompletion(){
+				autocompleteOptions = {
+					componentRestrictions: {country: 'fr'}
+				}
+				autocomplete = new google.maps.places.Autocomplete($('#search')[0], autocompleteOptions);
+
+				// autocomplete click listener
+				google.maps.event.addListener(autocomplete, 'place_changed', function() {
+					var place = autocomplete.getPlace();
+
+					if (!place.geometry) {
+						getPredictions(place.name);
+						return;
+					}else{
+						$('#predictbox').fadeOut();
+						$('#predictList').empty();
+					}
+
+					if (place.geometry.viewport) {
+						map.fitBounds(place.geometry.viewport);
+					} else {
+						createMarker(place);
+						map.setCenter(place.geometry.location);
+						map.setZoom(17);
+					}
+				});
+			}
+
+			// init predictions request
+			function getPredictions(query){
+				var service = new google.maps.places.AutocompleteService();
+				var options = {
+								input: query,
+								bounds: map.getBounds(),
+								componentRestrictions: {
+								country: 'fr'
+								}
+							  };
+				service.getQueryPredictions(options, predictionCallback);
+			}
+
+			// prediction response
+			function predictionCallback(predictions, status) {
+				$('#predictbox').fadeOut();
+				$('#predictList').empty();
+
+				if (status != google.maps.places.PlacesServiceStatus.OK) {
+					alert(status);
+					return;
+				}
+
+				if(predictions.length == 1){
+					getPlaceCoordsFromId(predictions[0].place_id);			
+				}else{
+					populateList(predictions);
+				}
+			}
+
+			// get place details from unique place identifier
+			function getPlaceCoordsFromId(id){
+				var request = {
+					placeId: id
+				};
+
+				service = new google.maps.places.PlacesService(map);
+				service.getDetails(request, getPlaceCallback);
+			}
+
+			// place service from coords callback
+			function getPlaceCallback(place, status){
+				if (status == google.maps.places.PlacesServiceStatus.OK) {
+					map.setCenter(place.geometry.location);
+					map.setZoom(17);
+					createMarker(place);
+				}
+			}
+
+			// populate ul/li list fom predictions
+			function populateList(data){
+				for (var i = 0; i < data.length; i++) {
+					$('#predictList').append('<li class="list-group-item">' + data[i].description + '</li>');
+				}
+				$('#predictbox').fadeIn();
+			}
+
+			// create marker from precised place and bind an infowindow on it
+			function createMarker(place) {
+				removeMarkers();
+				var placeLoc = place.geometry.location;
+				var marker = new google.maps.Marker({
+					map: map,
+					position: place.geometry.location
+				});
+				
+				markers.push(marker);
+
+				google.maps.event.addListener(marker, 'click', function(){
+					infowindow = new google.maps.InfoWindow();
+					infowindow.setContent(place.name);
+					infowindow.open(map, this);
+				});
+			}
+
+
+			function removeMarkers(){
+				for(i = 0; i < markers.length; i++){
+					markers[i].setMap(null);
+				}
+				markers = [];
+			}
+
+	</script>
+	<style type="text/css">
+		html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+		#searchbox{
+			padding-top: 30px;
+			width: 70%;
+		}
+
+		#searchbox ul{
+			width: 100%;
+		}
+
+		#searchbox ul li:first-child{
+			width: 80%;
+		}
+
+		#searchbox ul li:last-child{
+			width: 19%;
+		}
+
+		#searchbox input[type="text"]{
+			width: 100%;
+			text-overflow: ellipsis;
+		}
+
+		#predictbox{
+			margin-right: 20px;	
+			width: 20%;
+			min-height: 20%;
+			display: none;	
+		}
+
+		#predictbox ul li{
+			cursor: hand;
+			cursor: pointer;
+		}
+
+		#predictbox ul li:hover{
+			background-color: #428BCA;
+			color: #FFF;
+		}
+		</style>
+</head>
+<body>
+	<div id="map-canvas"></div>
+	<div id="searchbox">
+		<ul class="list-inline">
+			<li>
+				<input type="text" value="" id="search" class="form-control" placeholder="Recherchez un lieu, un commerce, une adresse (ex: Tour Eiffel, Cinéma, Restaurant)..." />
+			</li>
+			<li><input type="button" value="Rechercher" id="searchButton" class="btn btn-default" /></li>
+		</ul>
+	</div>
+
+	<div id="predictbox" class="well">
+		<ul id="predictList" class="list-group">
+		</ul>
+	</div>
+</body>
+</html>

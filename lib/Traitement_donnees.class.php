@@ -297,24 +297,24 @@ function EntrepriseProjet($NumeroSiret)
     if ($_SESSION['hackathon'] == 0) 
         {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O" ));}
     else
-        {
-        return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O" ));
-        }
+        {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O" ));}
 }
 
 function EntrepriseStatistique($NumeroSiret)
 {
-
 $m = new MongoClient();
 //Todo
 if ($_SESSION['hackathon'] == 0) 
     {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));}
 else
-    {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));}
+    {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));}
 }
 
 function EntrepriseHistorique($NumeroSiret)
 {
     $m = new MongoClient();
-    return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));
-}
+    if ($_SESSION['hackathon'] == 0) 
+        {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossierSolde" => "O"));}
+    else 
+        {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O", "EtatDossierSolde" => "O"));}  
+ }

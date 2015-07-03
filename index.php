@@ -113,22 +113,21 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
                 <a class="close-reveal-modal" aria-label="Close">&#215;</a>
             </div>
         </figure>
-
     </div>
 </header>
 <!-- Chargement du bloc Hackathon -->
 <?php include_once(dirname(__DIR__).'/MesAidesPubliques/app/block/hackathon.php');?>
 
 <section>
-    <article class="row about">
+    <article class="row about Aaargh">
         <div class="small-9 medium-8 large-9 columns">
-            <h3>A propos</h3>
+            <h3 class="Aaargh"><b>A propos</b></h3>
 
             <p class="text">
                 <em><b>Mes Aides Publiques</b>, un Télé-service simple et efficace, au service des entreprises.</em>
             </p>
 
-            <p class=text">
+            <p class="text">
                 Vérifiez votre éligibilité à la règle des minimis.
                 Plus besoin de déclarer le détail de vos subventions à l’administration : visualisez la synthèse de vos
                 aides sur les trois dernières années
@@ -146,10 +145,10 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <?php include_once(dirname(__DIR__).'/MesAidesPubliques/app/block/partenaires.php');?>
 
 <section>
-    <div class="row contact">
+    <div class="row contact Aaargh">
         <hr>
         <div class="large-12 columns">
-            <h4>Contactez-nous</h4>
+            <h4 class="Aaargh"><b>Contactez-nous</b></h4>
 
             <div class="contact large-4 columns">
                 <strong>Mél</strong>: <br/>
@@ -163,9 +162,8 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
              for (var i = 0; i < jbmtkrp.length; i++) {
                  tuyolfh[jbmtkrp[i]] = fijnmhl[i];
              }
-             for (var i = 0; i < tuyolfh.length; i++) {
-                 document.write(tuyolfh[i]);
-             } //-->
+             for (var i = 0; i < tuyolfh.length; i++) {document.write(tuyolfh[i]);} 
+             //-->
          </script>
         <noscript>[Mél protégé] Merci d'activer Javascript</noscript>
         </span>

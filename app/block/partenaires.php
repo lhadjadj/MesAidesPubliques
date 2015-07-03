@@ -1,6 +1,6 @@
-<aside class="row">
+<aside class="row Aaargh">
     <div class="small-12 medium-12 large-12 columns">
-        <h3>Sponsors</h3>
+        <h3 class="Aaargh"><b>Sponsors</b></h3>
 
         <div class="sponsors">
             <div><a href="#" data-reveal-id="etatplateforme">

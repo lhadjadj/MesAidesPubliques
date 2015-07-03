@@ -1,4 +1,4 @@
-<h3>Localisation du Projet</h3>
+<h3 class="Aaargh"><b>Localisation du Projet</b></h3>
 <div class="row">
     <div class="row">
         <div class="small-12 columns">

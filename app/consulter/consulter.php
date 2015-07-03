@@ -1,12 +1,13 @@
 <?php
 session_start(); 
 require_once(dirname(dirname(__DIR__))."/lib/Traitement_donnees.class.php");
+require_once(dirname(dirname(__DIR__))."/conf/parametres.php");
 $traitement = TraitementsDonneesPO();
 $titre_page = "Mes Aides publiques - Consulter mes Aides Publiques";
 $url_canonical = "/app/consulter/consulter.php";
-$description="Consulter mes Aides Publiques";
-$twitter_domain="En savoir plus sur mes aides";
-$twitter_description="Mes Aides Publiques est un télé-service de simplication administrative.";
+$description = "Consulter mes Aides Publiques";
+$twitter_domain = "En savoir plus sur mes aides";
+$twitter_description = "Mes Aides Publiques est un télé-service de simplication administrative";
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -20,6 +21,38 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 
 <head>
     <?php include_once(dirname(__DIR__).'/block/head.php');?>
+    <link href="/css/pizza/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&language=fr&region=FR&key=<?php echo googleAPI ?>"></script>
+<!--   <script>
+var myCenter=new google.maps.LatLng(51.508742,-0.120850);
+var marker;
+
+function initialize()
+{
+var mapProp = {
+  center:myCenter,
+  zoom:5,
+  disableDefaultUI:true,    
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var marker=new google.maps.Marker({
+  position:myCenter,
+  animation:google.maps.Animation.BOUNCE
+  });
+
+marker.setMap(map);
+
+var infowindow = new google.maps.InfoWindow({
+    content:"Mon Entreprise!"
+  });
+
+infowindow.open(map,marker);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>-->
 </head>
 
 <body>
@@ -51,9 +84,9 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
     <div class="large-6 columns" id="fiche-entreprise">
         <?php include_once(dirname(__DIR__).'/block/fiche-entreprise.php');?>
     </div>
+
     <div class="large-6 columns" id="demande-en-cours">
         <?php include_once(dirname(__DIR__).'/block/dossier-en-cours.php');?>
-        <!-- <a href="<?php echo $url_canonical;?>#" class="button small info expand">Historique</a> -->
     </div>
 </section>
 <section class="clearfix">
@@ -77,6 +110,8 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <script src="/js/foundation/foundation.reveal.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
 <script src="/js/vendor/toucheffects.js"></script>
+<script src="/js/pizza/pizza.js?ver=0.2.1"></script>
+<script src="/js/pizza/snapsvg.js?ver=0.1.1"></script>
 
 <script type="text/javascript">
     $(document).foundation({
@@ -86,6 +121,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
             }
         }
     });
+    
     $('#listProjet').on('toggled', function (event, accordion) {
         console.log(accordion);
     });
@@ -109,6 +145,9 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
             $('.text').stop().animate({fontSize: taille + "em"}, 300);
         });
     });
+    
+    Pizza.init(document.body, {percent_offset:20});
+
 </script>
 </body>
 </html>

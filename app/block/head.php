@@ -1,27 +1,27 @@
 <base href="."/>
 <meta charset="utf-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
 <!---  //////////////// informations générales ///////////////////// -->
 <meta name="robots" content="noodp,noydir"/>
-<meta name="description" content="<?php $description;?>"/>
+<meta name="description" content="<?php echo $description;?>"/>
 
 
 <meta property="og:locale" content="fr_FR"/>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="<?php $description;?>"/>
-<meta property="og:description" content="<?php $description;?>"/>
-<meta property="og:url" content="<?php $url_canonical;?>"/>
-<meta property="og:site_name" content="<?php $description;?>"/>
+<meta property="og:title" content="<?php echo $description;?>"/>
+<meta property="og:description" content="<?php echo $description;?>"/>
+<meta property="og:url" content="<?php echo $url_canonical;?>"/>
+<meta property="og:site_name" content="<?php echo $description;?>"/>
 <meta property="article:publisher" content="https://www.facebook.com/mesaidespubliques"/>
 
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 <!-- ////////////////// Déclaration de la Card Twitter ///////////////////////-->
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:domain" content="<?php $twitter_domain; ?>"/>
+<meta name="twitter:domain" content="<?php echo $twitter_domain; ?>"/>
 <meta name="twitter:description"
       content="<?php $twitter_description; ?>"/>
-<meta name="twitter:title" content="<?php $description;?>"/>
+<meta name="twitter:title" content="<?php echo $description;?>"/>
 <meta name="twitter:url" content="/twitter-cards"/>
 <meta name="twitter:site" content="@MesAidesPub"/>
 <meta name="twitter:creator" content="@MesAidesPub"/>
@@ -54,7 +54,7 @@
 <link href="/css/police.css" type="text/css" media="screen, projection" rel="stylesheet"/>
 <link href="/css/component.css" rel="stylesheet" type="text/css"/>
 
-<link rel="canonical" href="<?php $url_canonical;?>"/>
+<link rel="canonical" href="<?php echo $url_canonical;?>"/>
 
 <!-- //////////////// Déclaration du fichier humans.txt ////////////////// -->
 <link type="text/plain" rel="author" href="/humans.txt"/>

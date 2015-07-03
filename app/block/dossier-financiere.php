@@ -1,207 +1,175 @@
-<h3>Données Financières</h3>
+<h3 class="Aaargh"><b>Données Financières</b></h3>
 <div class="row">
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Coût global du projet</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['MontantGlobal']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Montant global du projet</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['MontantGlobal']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Coût total elligibilité programmé</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['DepenseEligibleProgramme']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><hr /></div>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+        <div class="small-12 columns">
+            <div class="row">
+                <div class="small-5 columns"><label for="right-label" class="right">Coût total éligible programmé</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['DepenseEligibleProgramme']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Coût total elligibilité programmé : Part - Union Européenne</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['DepenseTotalProgrammeUE']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Union Européenne</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['DepenseTotalProgrammeUE']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Coût total elligibilité programmé : Part - Etat</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['DepenseTotalProgrammeEtat']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Etat</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['DepenseTotalProgrammeEtat']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Coût total elligibilité programmé : Part - Région</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['DepenseTotalProgrammeRegion']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Région</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['DepenseTotalProgrammeRegion']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Coût total elligibilité programmé : Part - Département</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['DepenseTotalProgrammeDepartement']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Département</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['DepenseTotalProgrammeDepartement']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Coût total elligibilité programmé : Part - Autre Public</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['DepenseTotalProgrammeAutrePublic']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Autre Public</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['DepenseTotalProgrammeAutrePublic']); ?></div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+        <div class="row">
+        <div class="small-12 columns">
+            <div class="row">
+                <div class="small-5 columns"><hr /></div>
+                <div class="small-7 columns">Coût total éligible programmé CPER</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="small-12 columns">
+            <div class="row">
+                <div class="small-5 columns"><label for="right-label" class="right">Etat</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['DepenseTotalProgrammeCperEtat']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Coût total elligibilité programmé CPER : Part - Etat</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['DepenseTotalProgrammeCperEtat']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Région</label></div>
+                <div class="small-7 columns"><?php echo $projet['DepenseTotalProgrammeCperRegion']; ?></div>
             </div>
         </div>
     </div>
+
+    <br />
     <div class="row">
-        <div class="small-12 columns">
-            <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Coût total elligibilité programmé CPER : Part - Région</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['DepenseTotalProgrammeCperRegion']; ?> &euro;
-                </div>
-            </div>
-        </div>
+      <div class="small-12 columns">
+         <div class="row">
+            <div class="small-5 columns"><hr /></div>
+            <div class="small-7 columns">Montant total payé :</div>
+         </div>
+       </div>
     </div>
 
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Montant payé : Part - Union Européenne</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['PaiementTotalUE']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Union Européenne</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['PaiementTotalUE']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Mont payé : Part - Etat</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['PaiementTotalEtat']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Etat</label></div>     
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['PaiementTotalEtat']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Mont payé : Part - Région</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['PaiementTotalRegion']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Région</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['PaiementTotalRegion']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Mont payé : Part - Département</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['PaiementTotalDepartement']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Département</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['PaiementTotalDepartement']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Mont payé : Part - Autre Public</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['PaiementTotalAutrePublic']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Autre Public</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['PaiementTotalAutrePublic']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Mont payé : Part - Privée</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['PaiementTotalPrive']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Privée</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['PaiementTotalPrive']); ?></div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Mont payé : Part - Bénéficiaire</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['PaiementTotal']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Bénéficiaire</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['PaiementTotal']); ?></div>
             </div>
         </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="small-12 columns">
+         <div class="row">
+            <div class="small-5 columns"><hr /></div>
+         </div>
+       </div>
     </div>
     <div class="row">
         <div class="small-12 columns">
             <div class="row">
-                <div class="small-5 columns">
-                    <label for="right-label" class="right">Dépenses certifiées</label>
-                </div>
-                <div class="small-7 columns">
-                    <?php echo $projet['PaiementTotalValideAC']; ?> &euro;
-                </div>
+                <div class="small-5 columns"><label for="right-label" class="right">Dépenses certifiées</label></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['PaiementTotalValideAC']); ?></div>
             </div>
         </div>
     </div>
