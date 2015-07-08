@@ -8,7 +8,7 @@
 
         <section class="top-bar-section">
             <!-- Left Nav Section -->
-            <ul class="left">
+            <ul class="left hide-for-medium-down">
                 <li class="has-form">
                     <div class="row collapse">
                         <div class="large-8 small-9 columns">
@@ -20,8 +20,8 @@
                     </div>
                 </li>
                 <li class="divider"></li>
-                <li><a><span id="Agrandir">+a</span></a></li>
-                <li><a> <span id="Reduire">-a</span> </a></li>
+                <li><a><span id="Agrandir" class="DensiaSans" title="Agrandir la police (CTRL+)"><b>+t</b></span></a> </li>
+                <li><a><span id="Reduire" class="DensiaSans" title="Diminuer la police (CTRL-)"><b>-t</b></span> </a>  </li>
                 <li class="divider"></li>
             </ul>
             <!-- Right Nav Section -->
@@ -32,7 +32,7 @@
                 <li class="divider"></li>
                 <li><a href="/app/declarer/declarer.php">Déclarer</a></li>
                 <li class="divider"></li>
-                <li><a href="/app/aides/aidez-moi.php">Aidez-moi</a></li>
+                <li><a id="aidezmoi">Aidez-moi</a></li>
                 <li class="divider"></li>
                 <li class="has-form">
                     <a href="#" data-reveal-id="quitter" class="button" role="button">Quitter</a>
@@ -42,7 +42,6 @@
                         <p class="lead">Une idée simple, pour un service simple.</p>
                         <p class="lead">Avec mes Aides Publiques.</p>
                         <a href="/" class="secondary button">Se déconnecter</a>
-                        <?php session_destroy(); ?>
                         <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                     </div>
                 </li>

@@ -2,15 +2,15 @@
 require_once(dirname(dirname(__DIR__))."/lib/Traitement_donnees.class.php");
 require_once(dirname(dirname(__DIR__))."/lib/GeoCode.php");
 if (isset($_POST['siret']) && isset($_POST['email']))
-    {
+   {
     $identiteEntreprise = EntrepriseIdentite($_POST['siret']);
     $MonAdresse=$identiteEntreprise['AdresseRue'] . ", " . $identiteEntreprise['AdresseCodePostale'] . ", " . $identiteEntreprise['AdresseVille'] ;
     $geoCode = geocode($MonAdresse);
-    }
+   }
     
 ?>
 
-<h2 class="Aaargh"><b>Mon Entreprise</b></h2>
+<h2><b>Mon Entreprise</b></h2>
 <div class="row">
     <div class="small-12 columns">
         <div class="row">
@@ -172,8 +172,5 @@ if (isset($_POST['siret']) && isset($_POST['email']))
 ?>
     <div id="gmap_canvas" style="width:500px;height:380px;margin-left:40px;">Chargement de la carte...</div>
     <div id='map-label'></div>
-    
-    
     </div>
 </div>
-

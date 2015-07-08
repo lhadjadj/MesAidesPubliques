@@ -1,4 +1,4 @@
-<div class="row text-center">
+<div class="row text-center" id="numero2">
     <div class="large-12 small-12 columns">
         <figure class="fade">
             <div><h1 class="intro-text bleu-2 DensiaSans">HackaThon 18 & 19 juin 2015</h1><img src="/img/Banner/04.jpg"

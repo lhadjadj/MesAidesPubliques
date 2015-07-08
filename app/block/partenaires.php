@@ -1,7 +1,6 @@
-<aside class="row Aaargh">
+<aside class="row" id="numero3">
     <div class="small-12 medium-12 large-12 columns">
-        <h3 class="Aaargh"><b>Sponsors</b></h3>
-
+        <h3><b>Sponsors</b></h3>
         <div class="sponsors">
             <div><a href="#" data-reveal-id="etatplateforme">
                     <img src="/img/Logo/logo_hackathon-200x133.jpg"

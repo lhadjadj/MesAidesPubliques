@@ -1,5 +1,5 @@
 <?php
-//session_start(); 
+session_start();
 require_once(__DIR__ . "/Curl.php");
 
 use \Curl\Curl;
@@ -76,21 +76,22 @@ function TraitementsDonneesPO()
     //              
     
     //On vérifie que les données sont bien passées, attention avec les certificats auto-signés qui ne fonctionnent pas correctement avec NTLM
-    if (!isset($_POST['siret']) && !isset($_POST['email'])) 
+    if (!($_POST['siret']) && !isset($_POST['email'])) 
     {
         return array('TypeAlerte' => "alert radius", 'Message' => "Les données du formulaires sont erronnées." );
     }
 
     // récupération des parametres de connexion - n° siret valide : --> vide : 23350001600040, --> ok : 38073485500014
-    require_once(str_replace('lib', '/conf/', __DIR__) . "parametres.php");
-    
+    require (str_replace('lib', 'conf/', __DIR__) . "parametres.php");
+
     // fonction de chargement des données en base
     require_once(__DIR__ . "/Import_Json2MongoDB.php");
     
     $query=$_POST['siret'];
     $attention=false;
     
-        // Appel de la fonction de récupération des données
+    
+    // Appel de la fonction de récupération des données
     $parsed_json = GetData($url, $dataset['1'], $query, $facet, $proxy);
 
     if (is_string($parsed_json)) {
@@ -268,12 +269,16 @@ function TraitementsDonneesPO()
      // Je tests si on est sur la base locale ou pas et je renvoie un message à la page pour afficher les bons messages 'Locale' => 1
     if ($attention) 
         {
+        //je travail avec la base locale
         if (!$_SESSION['hackathon']){$_SESSION['hackathon'] = 1;}
+        if (!$_SESSION['numsiret']){$_SESSION['numsiret'] = $_POST['siret'];}
         return array('TypeAlerte' => "success radius", 'Message' => "Les informations de votre entreprise ont été retrouvées.", 'NbDossier' =>$ChargementDonnees);
         }
     else 
         {
+        //je travail avec le cache ou opendatasoft
         if (!$_SESSION['hackathon']){$_SESSION['hackathon'] = 0;}
+        if (!$_SESSION['numsiret']){$_SESSION['numsiret'] = $_POST['siret'];}
         return array('TypeAlerte' => "success radius", 'Message' => "Les informations de votre entreprise ont été retrouvées." );
         }
 }
@@ -303,7 +308,6 @@ function EntrepriseProjet($NumeroSiret)
 function EntrepriseStatistique($NumeroSiret)
 {
 $m = new MongoClient();
-//Todo
 if ($_SESSION['hackathon'] == 0) 
     {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));}
 else

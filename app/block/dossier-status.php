@@ -1,9 +1,9 @@
-<h3 class="Aaargh"><b>Status</b></h3>
+<h3><b>Statut</b></h3>
 <div class="row">
   <div class="row">
    <div class="small-12 columns">
     <div class="row">
-     <div class="small-5 columns"><label for="right-label" class="right">Status du dossier</label></div>
+     <div class="small-5 columns"><label for="right-label" class="right">Statut du dossier</label></div>
      <div class="small-7 columns"><?php echo $projet['EtatStatus']; ?></div>
     </div>
    </div>

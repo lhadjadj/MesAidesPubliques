@@ -6,4 +6,5 @@
  $dataset = array(1 => "?dataset=xxxxxxxxxxxxxxxxx", 2 => "");
  $facet = "&facet=xxxxxxx";
  $googleAPI="xxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+ $maVersion="x.x.x";
 ?>

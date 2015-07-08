@@ -5,7 +5,7 @@ if (isset($_POST['siret']) && isset($_POST['email']))
     setlocale(LC_MONETARY, 'fr_FR.utf8');
 ?>
 
-<h2 class="Aaargh"><b>Historique</b></h2>
+<h2><b>Historique</b></h2>
 
 <?php
 if(!empty($historiqueEntreprise)) { ?>

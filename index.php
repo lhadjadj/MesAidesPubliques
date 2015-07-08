@@ -1,5 +1,6 @@
 <?php
 session_start(); 
+require_once(dirname(dirname(__DIR__))."/WWW/MesAidesPubliques/conf/parametres.php");
 $titre_page = "Mes Aides publiques - Portail d'accès";
 $url_canonical = "/";
 $description="Mes Aides Publiques, une procédure de simplification des demandes d'aides publiques.";
@@ -53,56 +54,54 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 </section>
 
 <!-- //////////////// Header de la page ////////////////////////////////// -->
-<!-- <div id="container-hearder" class="row DensiaSans"> -->
-<header id="menu-container" class="row medium-uncollapse large-collapse DensiaSans" role="banner">
+<header id="menu-container" class="row medium-uncollapse large-collapse" role="banner">
     <div class="small-12 medium-4 large-6 columns">
-        <h1 class="Aaargh"><b>Mes Aides Publiques</b></h1>
+        <h1 id="monApplication"><b id="firstStop">Mes Aides Publiques</b></h1>
     </div>
-    <div class="small-4 medium-2 large-1 columns">
-        <div id="Agrandir" class="Aaarg"><b>+a</b></div>
-        <div id="Reduire" class="Aaarg">-a</div>
+    <div class="small-4 medium-2 large-1 columns" style="margin-top: 30px;">
+        <div id="Agrandir" class="DensiaSans" title="Agrandir la police (CTRL+)"><b>+t</b></div>
+        <div id="Reduire" class="DensiaSans" title="Diminuer la police (CTRL-)"><b>-t</b></div>
     </div>
-    <div class="small-12 medium-3 large-2 columns">
-        <figure class="pub_responsive"><img src="/img/Logo/responsive.png" alt="je suis responsive" /></figure>
-        <figure class="pub_rgaa"><img src="/img/Logo/logo_e_accessible.jpg" alt="je suis rgaa" /></figure>
-    
+    <div class="small-8 medium-3 large-2 columns" id="numero1">
+        <figure class="pub_responsive"><img src="/img/Logo/responsive.png" alt="je suis responsive" title="Je suis responsive."/></figure>
+        <figure class="pub_rgaa"><img src="/img/Logo/logo_e_accessible.jpg" alt="je suis rgaa" title="Je suis conforme RGAA 1*."/></figure>
+        <figure class="pub_doc">
+            <a data-tooltip aria-haspopup="true" 
+               class="has-tip tip-bottom radius" 
+               data-options="show_on:large; hover_delay: 50;"
+               title="Cliquez sur moi, pour commencer la visite guidée." 
+               id="aidezmoi">
+               <img src="/img/Icone/docteur.png" alt="Guide" />
+            </a>
+        </figure>
     </div>
     <div class="small-12 medium-3 large-3 columns">
-
-        <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true"
-             role="dialog">
-
-            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+        <div id="myModal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+           <a class="close-reveal-modal" aria-label="Close">&#215;</a>
         </div>
-        <figure class="boutonFC">
+        <figure class="boutonFC" id="numero4">
             <a data-tooltip aria-haspopup="true" 
                class="has-tip tip-right radius" 
                data-options="show_on:large; hover_delay: 50;" 
                title="Cliquez ici pour vous authentifier avec FranceConnect" 
                data-reveal-id="FranceConnect" 
                rel="group" href="#">
-               <img src="/img/Logo/FranceConnect.jpg"
-               alt="Identification France-Connect"/>
+               <img src="/img/Logo/FranceConnect.jpg" alt="Identification France-Connect"/>
             </a>
 
-            <div id="FranceConnect" class="reveal-modal" data-reveal aria-labelledby="FranceConnectTitle"
-                 aria-hidden="true" role="dialog">
+            <div id="FranceConnect" class="reveal-modal" data-reveal aria-labelledby="FranceConnectTitle" aria-hidden="true" role="dialog">
                 <h2 id="FranceConnectTitle">Saisie des informations d'identification</h2>
-
                 <form Method="POST" action="/app/consulter/consulter.php">
                     <fieldset>
                         <legend>identification de l'entreprise</legend>
                         <label for="siret">Votre N° de Siret
-                            <input type="text" name="siret" id="siret" placeholder="0123456789012345"
-                                   maxlength="15 required focus"/>
+                            <input type="text" name="siret" id="siret" placeholder="Ex. 38073485500014" maxlength="15 required focus"/>
                         </label>
-                        <label for="adresse mél">Votre adresse mél
-                            <input type="email" name="email" id="email" placeholder="laurent.hadjadj@asp-public.fr"
-                                   required/>
+                        <label for="adresse mél">Votre adresse mél 
+                            <input type="email" name="email" id="email" placeholder="laurent.hadjadj@asp-public.fr" required/>
                         </label>
                         <label for="date de naissance">Votre date de naissance
-                            <input type="date" name="date de naissance" id="date de naissance" placeholder="07/04/1971"
-                                   maxlength="10" required/>
+                            <input type="date" name="date de naissance" id="date de naissance" placeholder="07/04/1971" maxlength="10" required/>
                         </label>
                     </fieldset>
                     <p><em>En validant ce formulaire, vous <b>autorisez Mes Aides Publiques</b> à ré-utiliser vos données déjà déclarées.</em></p>
@@ -115,25 +114,23 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
         </figure>
     </div>
 </header>
+
 <!-- Chargement du bloc Hackathon -->
 <?php include_once(dirname(__DIR__).'/MesAidesPubliques/app/block/hackathon.php');?>
 
 <section>
-    <article class="row about Aaargh">
+    <article class="row about Andika">
         <div class="small-9 medium-8 large-9 columns">
-            <h3 class="Aaargh"><b>A propos</b></h3>
-
+            <h3><b>A propos</b></h3>
             <p class="text">
-                <em><b>Mes Aides Publiques</b>, un Télé-service simple et efficace, au service des entreprises.</em>
+                <em><b>Mes Aides Publiques</b></em>, un Télé-service simple et efficace, au service des entreprises.
             </p>
-
             <p class="text">
                 Vérifiez votre éligibilité à la règle des minimis.
                 Plus besoin de déclarer le détail de vos subventions à l’administration : visualisez la synthèse de vos
                 aides sur les trois dernières années
                 et déterminez votre plafond de minimis.
             </p>
-
         </div>
         <div class="small-3 medium-4 large-3 columns">
             <img src="/img/Logo/simplifier_pour_les_entreprises.png">
@@ -145,47 +142,42 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <?php include_once(dirname(__DIR__).'/MesAidesPubliques/app/block/partenaires.php');?>
 
 <section>
-    <div class="row contact Aaargh">
-        <hr>
-        <div class="large-12 columns">
-            <h4 class="Aaargh"><b>Contactez-nous</b></h4>
-
-            <div class="contact large-4 columns">
-                <strong>Mél</strong>: <br/>
-                <a href="#">
-        <span>
-         <script type="text/javascript">
-            //<!-- 
-             var fijnmhl = ['m', 'u', 'a', '"', '.', ' ', 'e', '>', 'o', '@', 's', 's', 'l', '"', 'd', 'b', 't', 'e', 'i', ':', 'e', 'p', 'f', 's', 'o', 'e', 's', '"', 'l', 'c', '=', 'i', 'q', '"', '<', 'h', 's', 'l', 'e', '/', 'r', 'r', 'r', 'u', 's', 'i', 'r', '<', 'i', 'm', 't', 'a', 'i', 'i', 'd', 's', 'n', 'a', 'i', 'u', 'f', '@', 'a', 'p', 'f', 'n', 'n', 'm', 'n', 'm', 'e', 'u', ' ', 'e', 'r', '=', 'q', '>', 'b', 'a', 'a', 't', 'o', 'o', 'i', 'f', 'f', 'a', 'i', 'l', 'a', 'e', 'm', 's', 'a', 'l', 'm', 'o', 'i', '.'];
-             var jbmtkrp = [21, 42, 79, 8, 45, 49, 5, 99, 67, 75, 54, 53, 12, 56, 81, 38, 13, 43, 80, 15, 82, 84, 46, 30, 73, 91, 35, 48, 51, 50, 55, 11, 89, 62, 0, 3, 78, 39, 77, 97, 47, 20, 4, 37, 44, 64, 68, 96, 16, 76, 71, 22, 60, 32, 33, 92, 17, 59, 88, 90, 6, 27, 52, 36, 66, 26, 74, 28, 65, 9, 34, 85, 2, 29, 95, 7, 41, 63, 86, 10, 1, 23, 14, 25, 24, 18, 94, 31, 72, 61, 70, 57, 69, 83, 98, 87, 58, 19, 40, 93];
-             var tuyolfh = new Array();
-             for (var i = 0; i < jbmtkrp.length; i++) {
-                 tuyolfh[jbmtkrp[i]] = fijnmhl[i];
-             }
-             for (var i = 0; i < tuyolfh.length; i++) {document.write(tuyolfh[i]);} 
-             //-->
-         </script>
-        <noscript>[Mél protégé] Merci d'activer Javascript</noscript>
-        </span>
-                </a>
-            </div>
-
-            <div class="contact large-2 columns">
-                <strong>Twitter</strong>: <br/>@MesAidesPub
-            </div>
-            <div class="contact large-3 columns">
-                <strong>Téléphone</strong>: <br/>(+33) 1 733 018 76
-            </div>
-            <div class="contact large-3 columns">
-                <strong>Se tenir informer</strong>: <br/><a href="/feed/flux.xml">Fil RSS</a>
-            </div>
-        </div>
+    <div class="row contact">
+      <hr>
+      <div class="large-12 columns">
+         <h4><b>Contactez-nous</b></h4>
+         <div class="contact large-4 columns" class="Andika">
+            <strong>Mél</strong>: <br/>
+             <a href="#">
+                <span>
+                 <script type="text/javascript">
+                    //<!-- 
+                    var fijnmhl = ['m', 'u', 'a', '"', '.', ' ', 'e', '>', 'o', '@', 's', 's', 'l', '"', 'd', 'b', 't', 'e', 'i', ':', 'e', 'p', 'f', 's', 'o', 'e', 's', '"', 'l', 'c', '=', 'i', 'q', '"', '<', 'h', 's', 'l', 'e', '/', 'r', 'r', 'r', 'u', 's', 'i', 'r', '<', 'i', 'm', 't', 'a', 'i', 'i', 'd', 's', 'n', 'a', 'i', 'u', 'f', '@', 'a', 'p', 'f', 'n', 'n', 'm', 'n', 'm', 'e', 'u', ' ', 'e', 'r', '=', 'q', '>', 'b', 'a', 'a', 't', 'o', 'o', 'i', 'f', 'f', 'a', 'i', 'l', 'a', 'e', 'm', 's', 'a', 'l', 'm', 'o', 'i', '.'];
+                    var jbmtkrp = [21, 42, 79, 8, 45, 49, 5, 99, 67, 75, 54, 53, 12, 56, 81, 38, 13, 43, 80, 15, 82, 84, 46, 30, 73, 91, 35, 48, 51, 50, 55, 11, 89, 62, 0, 3, 78, 39, 77, 97, 47, 20, 4, 37, 44, 64, 68, 96, 16, 76, 71, 22, 60, 32, 33, 92, 17, 59, 88, 90, 6, 27, 52, 36, 66, 26, 74, 28, 65, 9, 34, 85, 2, 29, 95, 7, 41, 63, 86, 10, 1, 23, 14, 25, 24, 18, 94, 31, 72, 61, 70, 57, 69, 83, 98, 87, 58, 19, 40, 93];
+                    var tuyolfh = new Array();
+                    for (var i = 0; i < jbmtkrp.length; i++) {
+                        tuyolfh[jbmtkrp[i]] = fijnmhl[i];
+                        }
+                    for (var i = 0; i < tuyolfh.length; i++) {document.write(tuyolfh[i]);} 
+                    //-->
+                 </script>
+                <noscript>[Mél protégé] Merci d'activer Javascript</noscript>
+                </span>
+             </a>
+         </div>
+      <div class="contact large-2 columns" class="Andika"><strong>Twitter</strong>: <br/>@MesAidesPub</div>
+      <div class="contact large-3 columns" class="Andika"><strong>Téléphone</strong>: <br/>(+33) 1 733 018 76</div>
+      <div class="contact large-3 columns" class="Andika"><strong>Se tenir informer</strong>: <br/><a href="/feed/flux.xml">Fil RSS</a></div>
     </div>
+   </div>
 </section>
 
-<!--<section>-->
-    <?php include_once(dirname(__DIR__).'/MesAidesPubliques/app/block/footer.php');?>
-<!--</section>-->
+
+<!-- Chargement du footer de bas de page -->
+<?php include_once(dirname(__DIR__).'/MesAidesPubliques/app/block/footer.php');?>
+
+<!-- Chargement de l'aide en ligne -->
+<?php include_once(dirname(__DIR__).'/MesAidesPubliques/app/block/aides-index.php');?>
 
 <script src="/js/vendor/jquery.js?ver=2.1.4"></script>
 <script src="/js/vendor/jquery.placeholder.js?ver=2.1.0"></script>
@@ -195,14 +187,22 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <script src="/js/foundation/foundation.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.reveal.js"></script>
 <script src="/js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
+<script src="/js/foundation/foundation.joyride.js?ver=5.5.2"></script>
 <script src="/js/vendor/toucheffects.js"></script>
 
-
 <script type="text/javascript">
+    // Initialisation de Foundation
     $(document).foundation();
+    
+    //Fonction qui permet de lancer le guide sur le bouton Aidez-moi
+    $("#aidezmoi").click(function() {$(document).foundation('joyride', 'start');});
+    
+    // Initialisation de Slick pour la gestion des slideShow
     $(document).ready(function () {
         $('.fade').slick({});
     });
+    
+    // Gestion du slide show - Hackathon
     $(document).ready(function () {
         $('.sponsors').slick({});
     });
@@ -221,6 +221,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
         slidesToScroll: 1
     });
 
+    // Gestion du slide show - partenaires
     $('.sponsors').slick({
         centerMode: true,
         centerPadding: '60px',
@@ -248,9 +249,9 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
         ]
     });
 
-
+    //Fonction qui permet de diminuer ou d'augmenter la taille de la police de caractère
     $(document).ready(function () {
-        var taille = 1.2;
+        var taille = 1.4;
         var augmentation = 0.1;
         var tailleMax = 2.5;
         var tailleMin = 1.2;

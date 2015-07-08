@@ -1,5 +1,4 @@
 <?php
-session_start(); 
 require_once(dirname(dirname(__DIR__))."/lib/Traitement_donnees.class.php");
 require_once(dirname(dirname(__DIR__))."/conf/parametres.php");
 $traitement = TraitementsDonneesPO();
@@ -22,37 +21,7 @@ $twitter_description = "Mes Aides Publiques est un télé-service de simplicatio
 <head>
     <?php include_once(dirname(__DIR__).'/block/head.php');?>
     <link href="/css/pizza/pizza.css" media="screen, projector, print" rel="stylesheet" type="text/css" />
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&language=fr&region=FR&key=<?php echo googleAPI ?>"></script>
-<!--   <script>
-var myCenter=new google.maps.LatLng(51.508742,-0.120850);
-var marker;
-
-function initialize()
-{
-var mapProp = {
-  center:myCenter,
-  zoom:5,
-  disableDefaultUI:true,    
-  mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-
-var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-var marker=new google.maps.Marker({
-  position:myCenter,
-  animation:google.maps.Animation.BOUNCE
-  });
-
-marker.setMap(map);
-
-var infowindow = new google.maps.InfoWindow({
-    content:"Mon Entreprise!"
-  });
-
-infowindow.open(map,marker);
-}
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>-->
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&language=fr&region=FR&key=<?php echo $googleAPI ?>"></script>
 </head>
 
 <body>
@@ -60,6 +29,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <p class="browserupgrade">Vous utilisez un navigateur <strong>dépassé</strong>. Merci de <a
     href="http://browsehappy.com/"> mettre à jour./a> pour améliorer votre navigation.</p>
 <![endif]-->
+
+<?php //Si je n'ai pas de numero de siret alors je retourne sur le page d'accueil et je destroy le session
+if (!$_POST['siret']) {
+           session_destroy();
+           echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="/index.php";</SCRIPT>';
+           exit();
+    }
+?>
+
 <?php include_once(dirname(__DIR__).'/block/navbar.php');?>
 
 <section>
@@ -102,6 +80,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <?php include_once(dirname(__DIR__).'/block/footer.php');?>
 
 <script src="/js/vendor/jquery.js?ver=2.1.4"></script>
+<script src="/js/vendor/jquery.cookie.js?ver=1.4.1"></script>
 <script src="/js/vendor/jquery.placeholder.js?ver=2.1.2"></script>
 <script src="/js/foundation/foundation.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.topbar.js?ver=5.5.2"></script>
@@ -109,11 +88,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
 <script src="/js/foundation/foundation.accordion.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.reveal.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
+<script src="/js/foundation/foundation.joyride.js?ver=5.5.2"></script>
 <script src="/js/vendor/toucheffects.js"></script>
 <script src="/js/pizza/pizza.js?ver=0.2.1"></script>
 <script src="/js/pizza/snapsvg.js?ver=0.1.1"></script>
 
 <script type="text/javascript">
+    //initialisation de Foundation avec option accordéon
     $(document).foundation({
         accordion: {
             callback : function (accordion) {
@@ -121,12 +102,18 @@ google.maps.event.addDomListener(window, 'load', initialize);
             }
         }
     });
-    
+
+    //Fonction qui permet de lancer le guide sur le bouton Aidez-moi
+    $("#aidezmoi").click(function() {$(document).foundation('joyride', 'start');});
+
+    // Foundation gestion des evements de l'accordeon
     $('#listProjet').on('toggled', function (event, accordion) {
         console.log(accordion);
     });
+
+    //Fonction qui permet de diminuer ou d'augmenter la taille de la police de caractère   
     $(document).ready(function () {
-        var taille = 1.2;
+        var taille = 1.4;
         var augmentation = 0.1;
         var tailleMax = 2.5;
         var tailleMin = 1.2;
@@ -146,6 +133,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         });
     });
     
+    //Initialisation de la Pizza :)
     Pizza.init(document.body, {percent_offset:20});
 
 </script>

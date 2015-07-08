@@ -42,7 +42,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
     $(document).foundation();
     
     $(document).ready(function () {
-        var taille = 1.2;
+        var taille = 1.4;
         var augmentation = 0.1;
         var tailleMax = 2.5;
         var tailleMin = 1.2;

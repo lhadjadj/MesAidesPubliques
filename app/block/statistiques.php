@@ -4,7 +4,7 @@
 //    {$$statistiquesEntreprise = EntrepriseStatistique($_POST['siret']);}
     setlocale(LC_MONETARY, 'fr_FR.utf8');
 ?>
-<h2 class="Aaargh">Statistiques</h2>
+<h2>Statistiques</h2>
 <div class="large-8 columns">
 <p class="lead">Répartition par partenaire des montants programmés et certifiés</p>
 <div class="row graphs">

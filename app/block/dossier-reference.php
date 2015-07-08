@@ -1,4 +1,4 @@
-<h3 class="Aaargh"><b>Référence du projet</b></h3>
+<h3><b>Référence du projet</b></h3>
 <div class="row">
     <div class="row">
         <div class="small-12 columns">
