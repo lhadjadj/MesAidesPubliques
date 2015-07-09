@@ -297,28 +297,53 @@ function EntrepriseIdentite($NumeroSiret)
 
 function EntrepriseProjet($NumeroSiret)
 {
-    // Initialisation de la connexion
+    // on remonte que les dossiers dont le statut est Programmé, déposé, proposé en comité 
     $m = new MongoClient();
     if ($_SESSION['hackathon'] == 0) 
-        {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O" ));}
+        {
+        $cursor=$m->entreprise->projet->find(array("NumeroSiret" => S.$NumeroSiret, 
+                                                     "EtatStatus" => array('$in' => array("Déposé","Proposé comité","Programmé")), 
+                                                    "EtatDossierPaye" => array('$in' => array("N","O")),
+                                                    "EtatDossierSolde" => array('$in' => array("N","O"))
+                                                    ));
+        return $cursor;
+        }
     else
-        {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O" ));}
+        {
+        $cursor=$m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, 
+                                                     "EtatStatus" => array('$in' => array("Déposé","Proposé comité","Programmé")), 
+                                                     "EtatDossierPaye" => array('$in' => array("N")),
+                                                     "EtatDossierSolde" => array('$in' => array("N","O"))
+                                                    ));
+        return $cursor;
+        }
 }
 
 function EntrepriseStatistique($NumeroSiret)
 {
 $m = new MongoClient();
 if ($_SESSION['hackathon'] == 0) 
-    {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));}
+    {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossierSolde" => "O"));}
 else
-    {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O", "EtatDossiersolde" => "O"));}
+    {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O", "EtatDossierSolde" => "O"));}
 }
 
 function EntrepriseHistorique($NumeroSiret)
 {
+    // on remonte tous les dossiers quelques soit le statut (Annulé, programmé ou payé)
     $m = new MongoClient();
     if ($_SESSION['hackathon'] == 0) 
-        {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossierSolde" => "O"));}
+        {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret ));}
     else 
-        {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O", "EtatDossierSolde" => "O"));}  
+        {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret));}  
+ }
+ 
+ function DossierAnnuleHistorique($NumeroSiret)
+{
+    // on remonte tous les dossiers annulé et déprogrammée
+    $m = new MongoClient();
+    if ($_SESSION['hackathon'] == 0) 
+        {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatStatus" => "Abandonné / Déprogrammé" ));}
+    else 
+        {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatStatus" => "Abandonné / Déprogrammé"));}  
  }

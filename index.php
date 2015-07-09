@@ -104,7 +104,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
                             <input type="date" name="date de naissance" id="date de naissance" placeholder="07/04/1971" maxlength="10" required/>
                         </label>
                     </fieldset>
-                    <p><em>En validant ce formulaire, vous <b>autorisez Mes Aides Publiques</b> à ré-utiliser vos données déjà déclarées.</em></p>
+                    <p>En validant ce formulaire, vous <em><b>autorisez Mes Aides Publiques</b></em> à utiliser vos données.</p>
                     <br />
                     <br />
                     <input type="submit" value="Valider" class="button">

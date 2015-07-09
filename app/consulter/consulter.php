@@ -76,8 +76,11 @@ if (!$_POST['siret']) {
     </div>
 </section>
 
-<!-- Chargement du bloc Partenaires -->
+<!-- Chargement du bas de page -->
 <?php include_once(dirname(__DIR__).'/block/footer.php');?>
+
+<!-- Chargement de l'aide en ligne -->
+<?php include_once(dirname(__DIR__).'/block/aides-consulter.php');?>
 
 <script src="/js/vendor/jquery.js?ver=2.1.4"></script>
 <script src="/js/vendor/jquery.cookie.js?ver=1.4.1"></script>

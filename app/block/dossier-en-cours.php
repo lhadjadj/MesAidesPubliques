@@ -14,7 +14,29 @@ if(!empty($projetsEntreprise)) {
         <?php
         foreach($projetsEntreprise as $numProjet => $projet):global $projet;?>
             <li class="accordion-navigation">
-                <a href="<?php echo $url_canonical;?>#projet-<?php echo $numProjet?>" aria-expanded="false"><?php  echo $projet['Projet']?> (<strong><?php echo money_format('%.2n', $projet['MontantGlobal']); ?></strong>) </a>
+            <a href="<?php echo $url_canonical;?>#projet-<?php echo $numProjet?>" aria-expanded="false">
+           <?php 
+            switch ($projet['EtatStatus']) {
+              case "Déposé" :
+                    echo '<span class="label round success">DP</span>' . ' - ' . '(<strong>' . money_format('%.2n', $projet['MontantGlobal']) . '</strong>)' . ' - ' . $projet['Projet']; 
+                                                break;
+              case "Proposé comité" :
+                    echo '<span class="label round warning">PC</span>' . ' - ' . '(<strong>' . money_format('%.2n', $projet['MontantGlobal']) . '</strong>)' . ' - ' . $projet['Projet']; 
+                                                break;
+              case "Refusé en comité" :
+                    echo '<span class="label round alert">RC</span>' . ' - ' . '(<strong>' . money_format('%.2n', $projet['MontantGlobal']) . '</strong>)' . ' - ' . $projet['Projet'];  
+                                                break;
+              case "Programmé" : 
+                    echo '<span class="label round success">PG</span>' . ' - ' . '(<strong>' . money_format('%.2n', $projet['MontantGlobal']) . '</strong>)' . ' - ' . $projet['Projet']; 
+                                                break;
+              case "Abandonné / Déprogrammé" :
+                    echo '<span class="label round alert">AD</span>' . ' - ' . '(<strong>' . money_format('%.2n', $projet['MontantGlobal']) . '</strong>)' . ' - ' . $projet['Projet'];  
+                                                break;
+                }
+            ?>
+           </a>
+                
+                
                 <div class="content" id="projet-<?php echo $numProjet?>">
                     <?php include(dirname(__DIR__).'/block/dossier.php');?>
                 </div>

@@ -1,6 +1,12 @@
 <aside class="row" id="numero3">
     <div class="small-12 medium-12 large-12 columns">
-        <h3><b>Sponsors</b></h3>
+        <a data-tooltip aria-haspopup="true" 
+               class="has-tip tip-top radius" 
+               data-options="show_on:large; hover_delay: 50;"
+               title="Pour plus d'information sur nos partenaires, cliquez sur l'image." 
+               id="aidezmoi">
+              <h3><b>Sponsors</b></h3>
+        </a>
         <div class="sponsors">
             <div><a href="#" data-reveal-id="etatplateforme">
                     <img src="/img/Logo/logo_hackathon-200x133.jpg"

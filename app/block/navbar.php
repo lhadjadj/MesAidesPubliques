@@ -1,7 +1,7 @@
 <div class="fixed sticky">
     <nav class="top-bar" data-topbar role="navigation" data-options="sticky_on: large">
         <ul class="title-area">
-            <li class="name"><h1><a href="/">Mes Aides Publiques</a></h1>
+            <li class="name"><h1><a id="firstStop" href="/">Mes Aides Publiques</a></h1>
             </li>
             <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
         </ul>
@@ -12,10 +12,10 @@
                 <li class="has-form">
                     <div class="row collapse">
                         <div class="large-8 small-9 columns">
-                            <input type="text" name="rechercher" id="recharcher" placeholder="Dossier, Aides,...">
+                            <input type="text" name="rechercher" id="rechercher" placeholder="Dossier, Aides,...">
                         </div>
                         <div class="large-4 small-3 columns">
-                            <a href="#" class="alert button expand">Rechercher</a>
+                            <a id="Nav-01" href="#" class="alert button expand">Rechercher</a>
                         </div>
                     </div>
                 </li>
@@ -23,16 +23,17 @@
                 <li><a><span id="Agrandir" class="DensiaSans" title="Agrandir la police (CTRL+)"><b>+t</b></span></a> </li>
                 <li><a><span id="Reduire" class="DensiaSans" title="Diminuer la police (CTRL-)"><b>-t</b></span> </a>  </li>
                 <li class="divider"></li>
+                <li><a id="aidezmoi" class="DensiaSans" title="Commencer la visite guidée">?</a></li>
             </ul>
             <!-- Right Nav Section -->
             <ul class="right">
-                <li><a href="/app/consulter/consulter.php"/>Consulter</a></li>
+                <li><a id="Nav-02" href="/app/consulter/consulter.php"/>Consulter</a></li>
                 <li class="divider"></li>
-                <li><a href="/app/simuler/simuler.php">Simuler</a></li>
+                <li><a id="Nav-03" href="/app/simuler/simuler.php">Simuler</a></li>
                 <li class="divider"></li>
-                <li><a href="/app/declarer/declarer.php">Déclarer</a></li>
+                <li><a id="Nav-04" href="/app/declarer/declarer.php">Déclarer</a></li>
                 <li class="divider"></li>
-                <li><a id="aidezmoi">Aidez-moi</a></li>
+                <li><a href="/app/aides/aidez-moi.php">Aidez-moi</a></li>
                 <li class="divider"></li>
                 <li class="has-form">
                     <a href="#" data-reveal-id="quitter" class="button" role="button">Quitter</a>
@@ -48,4 +49,5 @@
             </ul>
         </section>
     </nav>
+    
 </div>

@@ -86,7 +86,7 @@
         <div class="small-12 columns">
             <div class="row">
                 <div class="small-5 columns"><label for="right-label" class="right">Région</label></div>
-                <div class="small-7 columns"><?php echo $projet['DepenseTotalProgrammeCperRegion']; ?></div>
+                <div class="small-7 columns"><?php echo money_format('%.2n', $projet['DepenseTotalProgrammeCperRegion']); ?></div>
             </div>
         </div>
     </div>
