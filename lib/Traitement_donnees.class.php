@@ -301,7 +301,7 @@ function EntrepriseProjet($NumeroSiret)
     $m = new MongoClient();
     if ($_SESSION['hackathon'] == 0) 
         {
-        $cursor=$m->entreprise->projet->find(array("NumeroSiret" => S.$NumeroSiret, 
+        $cursor=$m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, 
                                                      "EtatStatus" => array('$in' => array("Déposé","Proposé comité","Programmé")), 
                                                     "EtatDossierPaye" => array('$in' => array("N","O")),
                                                     "EtatDossierSolde" => array('$in' => array("N","O"))
@@ -317,15 +317,6 @@ function EntrepriseProjet($NumeroSiret)
                                                     ));
         return $cursor;
         }
-}
-
-function EntrepriseStatistique($NumeroSiret)
-{
-$m = new MongoClient();
-if ($_SESSION['hackathon'] == 0) 
-    {return $m->entreprise->projet->find(array("NumeroSiret" => $NumeroSiret, "EtatDossierPaye" => "O", "EtatDossierSolde" => "O"));}
-else
-    {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatDossierPaye" => "O", "EtatDossierSolde" => "O"));}
 }
 
 function EntrepriseHistorique($NumeroSiret)
@@ -347,3 +338,262 @@ function EntrepriseHistorique($NumeroSiret)
     else 
         {return $m->DataSource->Dossiers->find(array("NumeroSiret" => S.$NumeroSiret, "EtatStatus" => "Abandonné / Déprogrammé"));}  
  }
+ 
+function EntrepriseStatistique($NumeroSiret)
+{
+$m = new MongoClient();
+if ($_SESSION['hackathon'] == 0) 
+    {
+    //todo
+    return;
+    }
+else
+   {
+    
+    $c = $m->selectDB("DataSource")->selectCollection("Dossiers");
+
+    // pour un numero de siret données, on compte le nombre de dossier en fonction des status
+    $NbDossierStatut= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret))),
+            (array('$group' => array('_id' => '$EtatStatus', 'NBDossier' => array('$sum' => 1))))
+            );
+    
+    //Montant Global des projets (somme et moyenne)
+    $MontantFinancierDeclare= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'MontantTotal' => array('$sum' => '$MontantGlobal'), 
+                                     'MoyenneMontant' => array('$avg' => '$MontantGlobal'))))
+        );
+    
+    //Dépenses Eligible des projets (somme)
+    $DepensesEligibles= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'DepensesEligibles' => array('$sum' => '$DepenseEligibleProgramme') 
+                                     )))
+        );
+
+    //Dépenses EU des projets (somme)
+    $DepensesProgrammeesUE= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'DepensesProgrammeesUE' => array('$sum' => '$DepenseTotalProgrammeUE') 
+                                     )))
+        );
+    //Dépenses Etat des projets (somme)
+    $DepensesProgrammeesEtat= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'DepensesProgrammeesEtat' => array('$sum' => '$DepenseTotalProgrammeEtat') 
+                                     )))
+        );
+    //Dépenses Région des projets (somme)
+    $DepensesProgrammeesRegion= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'DepensesProgrammeesRegion' => array('$sum' => '$DepenseTotalProgrammeRegion') 
+                                     )))
+        );
+    //Dépenses Département des projets (somme)
+    $DepensesProgrammeesDepartement= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'DepensesProgrammeesDepartement' => array('$sum' => '$DepenseTotalProgrammeDepartement') 
+                                     )))
+        );
+    
+    //Dépenses AutrePrublique des projets (somme)
+    $DepensesProgrammeesAutrePublic= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'DepensesProgrammeesAutrePublic' => array('$sum' => '$DepenseTotalProgrammeAutrePublic') 
+                                     )))
+        );
+    
+
+    //Paiement Total Certifiés (somme)
+    $PaiementTotalCertifieAC= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'PaiementTotalCertifieAC' => array('$sum' => '$PaiementTotalValideAC') 
+                                     )))
+        );
+    //Paiement Total Certifiés UE (somme)
+    $PaiementTotalUE= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'PaiementTotalUE' => array('$sum' => '$PaiementTotalUE') 
+                                     )))
+        );
+    //Paiement Total Certifiés Etat (somme)
+    $PaiementTotalEtat= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'PaiementTotalEtat' => array('$sum' => '$PaiementTotalEtat') 
+                                     )))
+        );
+
+    //Paiement Total Certifiés Region (somme)
+    $PaiementTotalRegion= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'PaiementTotalRegion' => array('$sum' => '$PaiementTotalRegion') 
+                                     )))
+        );
+    //Paiement Total Certifiés Departement (somme)
+    $PaiementTotalDepartement= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'PaiementTotalDepartement' => array('$sum' => '$PaiementTotalDepartement') 
+                                     )))
+        );
+    //Paiement Total Certifiés AutrePublic (somme)
+    $PaiementTotalAutrePublic= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'PaiementTotalAutrePublic' => array('$sum' => '$PaiementTotalAutrePublic') 
+                                     )))
+        );
+
+    //Paiement Total Certifiés Autre Prive (somme)
+    $PaiementTotalAutrePrive= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'PaiementTotalAutrePrive' => array('$sum' => '$PaiementTotalPrive') 
+                                     )))
+        );
+    //Paiement Total Certifiés Entreprise (somme)
+    $PaiementTotalEntreprise= array(
+            (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé"))),
+            (array('$group' => array('_id' => null, 
+                                     'PaiementTotalEntreprise' => array('$sum' => '$PaiementTotal') 
+                                     )))
+        );
+    
+    $RépartitionDossier= $c->aggregate($NbDossierStatut);
+    $RépartitionMontant= $c->aggregate($MontantFinancierDeclare);
+    $StatDepensesEligibles= $c->aggregate($DepensesEligibles);
+    $StatDepensesProgrammeesUE= $c->aggregate($DepensesProgrammeesUE);
+    $StatDepensesProgrammeesEtat= $c->aggregate($DepensesProgrammeesEtat);
+    $StatDepensesProgrammeesRegion= $c->aggregate($DepensesProgrammeesRegion);
+    $StatDepensesProgrammeesDepartement= $c->aggregate($DepensesProgrammeesDepartement);
+    $StatDepensesProgrammeesAutrePublic= $c->aggregate($DepensesProgrammeesAutrePublic);
+    $StatPaiementTotalCertifieAC= $c->aggregate($PaiementTotalCertifieAC);
+    $StatPaiementTotalUE= $c->aggregate($PaiementTotalUE);
+    $StatPaiementTotalEtat= $c->aggregate($PaiementTotalEtat);
+    $StatPaiementTotalRegion= $c->aggregate($PaiementTotalRegion);
+    $StatPaiementTotalDepartement= $c->aggregate($PaiementTotalDepartement);
+    $StatPaiementTotalAutrePublic= $c->aggregate($PaiementTotalAutrePublic);
+    $StatPaiementTotalAutrePrive= $c->aggregate($PaiementTotalAutrePrive);
+    $StatPaiementTotalEntreprise= $c->aggregate($PaiementTotalEntreprise);
+
+    return (array("RépartitionDossier" => $RépartitionDossier, 
+                  "RépartitionMontant" => $RépartitionMontant,
+                  "StatDepensesEligibles" => $StatDepensesEligibles,
+                  "StatDepensesProgrammeesUE" => $StatDepensesProgrammeesUE,
+                  "StatDepensesProgrammeesEtat" => $StatDepensesProgrammeesEtat,
+                  "StatDepensesProgrammeesRegion" => $StatDepensesProgrammeesRegion,
+                  "StatDepensesProgrammeesDepartement" => $StatDepensesProgrammeesDepartement,
+                  "StatDepensesProgrammeesAutrePublic" => $StatDepensesProgrammeesAutrePublic,
+                  "StatPaiementTotalCertifieAC" => $StatPaiementTotalCertifieAC,
+                  "StatPaiementTotalUE" => $StatPaiementTotalUE,
+                  "StatPaiementTotalEtat" => $StatPaiementTotalEtat,
+                  "StatPaiementTotalRegion" => $StatPaiementTotalRegion,
+                  "StatPaiementTotalDepartement" => $StatPaiementTotalDepartement,
+                  "StatPaiementTotalAutrePublic" => $StatPaiementTotalAutrePublic,
+                  "StatPaiementTotalAutrePrive" => $StatPaiementTotalAutrePrive,
+                  "StatPaiementTotalEntreprise" => $StatPaiementTotalEntreprise
+            ));
+    }
+}
+
+function SimulerMinimis($NumeroSiret)
+{
+$m = new MongoClient();
+//if ($_SESSION['hackathon'] == 0) 
+//   {
+    //todo
+//    return;
+//    }
+//else
+   //{
+    $c = $m->selectDB("DataSource")->selectCollection("Dossiers");
+        
+    // Les aides d'Etat sont composé de toutes des Aides Etat, Region, Departement et AutrePrublic
+    $TotalAidesEtat= array(
+                    (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé", 'EtatDossierSolde' =>"O", 'EtatDossierPaye' => "O"))),
+                    (array('$project' => array('AnneePremierComite' => '$AnneePremierComite', 
+                                               'PaiementTotalEtat' => '$PaiementTotalEtat',
+                                               'PaiementTotalRegion' => '$PaiementTotalRegion',
+                                               'PaiementTotalDepartement' => '$PaiementTotalDepartement',
+                                               'PaiementTotalAutrePublic' => '$PaiementTotalAutrePublic'
+                                               ))),
+                    (array('$group' => array('_id' => '$AnneePremierComite',
+                                             'MontantAidesEtat' => array('$sum' => array('$add' => array(  '$PaiementTotalEtat',
+                                                                                                    '$PaiementTotalRegion',
+                                                                                                    '$PaiementTotalDepartement',
+                                                                                                    '$PaiementTotalAutrePublic')))
+                                     ))),
+                    (array('$sort' => array('_id' => -1 )))
+                   );
+
+        $TotalAidesEtatEtat= array(
+                    (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé", 'EtatDossierSolde' =>"O", 'EtatDossierPaye' => "O"))),
+                    (array('$project' => array('AnneePremierComite' => '$AnneePremierComite', 
+                                               'PaiementTotalEtat' => '$PaiementTotalEtat'
+                                               ))),
+                    (array('$group' => array('_id' => '$AnneePremierComite',
+                                             'MontantAidesEtat' => array('$sum' => '$PaiementTotalEtat')
+                                            ))),
+                    (array('$sort' => array('_id' => -1 )))
+                   );
+
+        $TotalAidesEtatRegion= array(
+                    (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé", 'EtatDossierSolde' =>"O", 'EtatDossierPaye' => "O"))),
+                    (array('$project' => array('AnneePremierComite' => '$AnneePremierComite', 
+                                               'PaiementTotalRegion' => '$PaiementTotalRegion'
+                                               ))),
+                    (array('$group' => array('_id' => '$AnneePremierComite',
+                                             'MontantAidesEtat' => array('$sum' => '$PaiementTotalRegion')
+                                            ))),
+                    (array('$sort' => array('_id' => -1 )))
+                   );
+
+       $TotalAidesEtatDepartement= array(
+                    (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé", 'EtatDossierSolde' =>"O", 'EtatDossierPaye' => "O"))),
+                    (array('$project' => array('AnneePremierComite' => '$AnneePremierComite', 
+                                               'PaiementTotalDepartement' => '$PaiementTotalDepartement'
+                                               ))),
+                    (array('$group' => array('_id' => '$AnneePremierComite',
+                                             'MontantAidesEtat' => array('$sum' => '$PaiementTotalDepartement')
+                                            ))),
+                    (array('$sort' => array('_id' => -1 )))
+                   );
+       $TotalAidesEtatAutrePublic= array(
+                    (array('$match' => array ('NumeroSiret' => S.$NumeroSiret, 'EtatStatus' => "Programmé", 'EtatDossierSolde' =>"O", 'EtatDossierPaye' => "O"))),
+                    (array('$project' => array('AnneePremierComite' => '$AnneePremierComite', 
+                                               'PaiementTotalAutrePublic' => '$PaiementTotalAutrePublic'
+                                               ))),
+                    (array('$group' => array('_id' => '$AnneePremierComite',
+                                             'MontantAidesEtat' => array('$sum' => '$PaiementTotalAutrePublic')
+                                            ))),
+                    (array('$sort' => array('_id' => -1 )))
+                   );
+       
+   $RqTotalAidesEtat=$c->aggregate($TotalAidesEtat);
+   $RqTotalAidesEtatEtat=$c->aggregate($TotalAidesEtatEtat);
+   $RqTotalAidesEtatRegion=$c->aggregate($TotalAidesEtatRegion);
+   $RqTotalAidesEtatDepartement=$c->aggregate($TotalAidesEtatDepartement);
+   $RqTotalAidesEtatAutrePublic=$c->aggregate($TotalAidesEtatAutrePublic);
+   
+   return (array(
+                 "RqTotalAidesEtat" => $RqTotalAidesEtat,
+                 "RqTotalAidesEtatEtat" => $RqTotalAidesEtatEtat,
+                 "RqTotalAidesEtatRegion" => $RqTotalAidesEtatRegion,
+                 "RqTotalAidesEtatDepartement" => $RqTotalAidesEtatDepartement,
+                 "RqTotalAidesEtatAutrePublic" => $RqTotalAidesEtatAutrePublic
+                ));
+   
+//   }
+}

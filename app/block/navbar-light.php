@@ -34,7 +34,7 @@
         <li><a><span id="Agrandir" class="DensiaSans" title="Agrandir la police (CTRL+)"><b>+t</b></span></a> </li>
         <li><a><span id="Reduire" class="DensiaSans" title="Diminuer la police (CTRL-)"><b>-t</b></span> </a>  </li>
         <li class="divider"></li>
-        <li><a id="aidezmoi" class="DensiaSans" title="Commencer la visite guidée">?</a></li>
+        <li><a id="aidezmoi" class="DensiaSans" title="Commencer la visite guidée"><strong>?</strong></a></li>
     </ul>
   </section>
 </nav>

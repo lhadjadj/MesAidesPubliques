@@ -1,12 +1,24 @@
 <?php
+session_start();
 require_once(dirname(dirname(__DIR__))."/lib/Traitement_donnees.class.php");
-require_once(dirname(dirname(__DIR__))."/conf/parametres.php");
-$traitement = TraitementsDonneesPO();
-$titre_page = "Mes Aides publiques - Consulter mes Aides Publiques";
-$url_canonical = "/app/consulter/consulter.php";
-$description = "Consulter mes Aides Publiques";
-$twitter_domain = "En savoir plus sur mes aides";
-$twitter_description = "Mes Aides Publiques est un télé-service de simplication administrative";
+require_once (dirname(dirname(__DIR__))."/conf/parametres.php");
+if (isset($_SESSION['numsiret']))
+   {
+   $identiteEntreprise = EntrepriseIdentite($_SESSION['numsiret']);
+   $message="Nous avons retrouvé vos coordonnées";
+   $type_message="success";
+   }
+else 
+   { 
+   $message="Nous n'avons pas retrouvé vos coordonnées. Merci de vous reconnecter via FranceConnect.";
+   $type_message="alert";
+   }
+
+$titre_page = "Mes Aides publiques - Simuler votre Eligibilité à la régle du Minimis";
+$url_canonical = "/app/simuler/siimuler.php";
+$description="Simuler votre Eligibilité à la régle du Minimis";
+$twitter_domain="En savoir plus sur la régle des Minims";
+$twitter_description="Mes Aides Publiques est un télé-service de simplication administrative";
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>
@@ -20,7 +32,6 @@ $twitter_description = "Mes Aides Publiques est un télé-service de simplicatio
 
 <head>
     <?php include_once(dirname(__DIR__).'/block/head.php');?>
-    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&language=fr&region=FR&key=<?php echo $googleAPI ?>"></script>
 </head>
 
 <body>
@@ -29,56 +40,28 @@ $twitter_description = "Mes Aides Publiques est un télé-service de simplicatio
     href="http://browsehappy.com/"> mettre à jour./a> pour améliorer votre navigation.</p>
 <![endif]-->
 
-<?php //Si je n'ai pas de numero de siret alors je retourne sur le page d'accueil et je destroy le session
-if (!$_POST['siret']) {
-           session_destroy();
-           echo '<SCRIPT LANGUAGE="JavaScript"> document.location.href="/index.php";</SCRIPT>';
-           exit();
-    }
-?>
 
 <?php include_once(dirname(__DIR__).'/block/navbar.php');?>
 
 <section>
-    <?php 
-    // Si je ne suis plus au Hackathon alors j'affiche la banner ci-dessous 
-    if ($_SESSION['hackathon'] == 1) {
-         echo '<div id="mainAlert" data-alert class="alert-box warning" tabindex="0" aria-live="assertive" role="dialogalert">
-                <p id="message" style="font-size:1.6em;">Le hackathon, c\'est fini. On utilise la base de tests locale - :) - avec ' . $traitement['NbDossier'] . ' dossiers</p>
-                <button href="#" tabindex="0" class="close" aria-label="Close Alert">&times;</button>
-              </div>';
-       }
-
-    ?>
-    <div id="mainAlert" data-alert class="alert-box <?php echo $traitement['TypeAlerte']; ?>" tabindex="0" aria-live="assertive"
-         role="dialogalert">
-        <p id="message" style="font-size:1.6em;"><?php echo $traitement['Message']; ?></p>
-        <button href="#" tabindex="1" class="close" aria-label="Close Alert">&times;</button>
-    </div>
+<div id="mainAlert" data-alert class="alert-box <?php echo $type_message; ?>" tabindex="0" aria-live="assertive" role="dialogalert">
+        <p id="message" style="font-size:1.6em;"><?php echo $message;?></p>
+       <button href="#" tabindex="0" class="close" aria-label="Close Alert">&times;</button>
+</div>
 </section>
-
+<br />
 <section class="clearfix">
     <div class="large-6 columns" id="fiche-entreprise">
-        <?php include_once(dirname(__DIR__).'/block/fiche-entreprise.php');?>
+        <?php include_once(dirname(__DIR__).'/block/fiche-entreprise-reduite.php');?>
     </div>
-    <div class="large-6 columns" id="demande-en-cours">
-        <?php include_once(dirname(__DIR__).'/block/dossier-en-cours.php');?>
-    </div>
-</section>
-<section class="clearfix">
-    <div class="large-6 columns" id="statistiques">
-        <?php include_once(dirname(__DIR__).'/block/statistiques.php');?>
-    </div>
-    <div class="large-6 columns" id="historique">
-        <?php include_once(dirname(__DIR__).'/block/historique.php');?>
+
+    <div class="large-6 columns" id="simuler-minimis">
+        <?php include_once(dirname(__DIR__).'/block/simuler-minimis.php');?>
     </div>
 </section>
 
 <!-- Chargement du bas de page -->
 <?php include_once(dirname(__DIR__).'/block/footer.php');?>
-
-<!-- Chargement de l'aide en ligne -->
-<?php include_once(dirname(__DIR__).'/block/aides-consulter.php');?>
 
 <script src="/js/vendor/jquery.js?ver=2.1.4"></script>
 <script src="/js/vendor/jquery.cookie.js?ver=1.4.1"></script>
@@ -89,10 +72,8 @@ if (!$_POST['siret']) {
 <script src="/js/foundation/foundation.accordion.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.reveal.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
-<script src="/js/foundation/foundation.joyride.js?ver=5.5.2"></script>
-<script src="/js/foundation/foundation.tab.js?ver=5.5.2"></script>
 <script src="/js/vendor/toucheffects.js"></script>
-<script src="/js/chart/Chart.js?ver=1.0.2"></script>
+
 
 <script type="text/javascript">
     //initialisation de Foundation avec option accordéon
@@ -125,9 +106,6 @@ if (!$_POST['siret']) {
             $('.text').stop().animate({fontSize: taille + "em"}, 300);
         });
     });
-    
-   $(document).foundation({tab: {callback : function (tab) {console.log(tab);}}});
-  <?php include_once(dirname(__DIR__).'/block/statistiques-graphiques.php');?>
 </script>
 </body>
 </html>

@@ -7,4 +7,6 @@
  $facet = "&facet=xxxxxxx";
  $googleAPI="xxxxxxxxxxxxxxxxxxxxxxxxxxxx";
  $maVersion="x.x.x";
+ $APIEntreprise="https://api-dev.apientreprise.fr/api/v1/etablissements/";
+ $APIEntrepriseToken="?token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
 ?>

@@ -9,7 +9,7 @@ if (isset($_SESSION['numsiret']))
     $type_message="success";
    }
 else 
-    { $message="Nous n'avons pas retrouvé vos coordonnées. Merci de relancer la connexion à FranceConnect";
+    { $message="Nous n'avons pas retrouvé vos coordonnées. Merci de vous reconnecter via FranceConnect";
       $type_message="alert";
     }
 
@@ -27,23 +27,6 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 
 <head>
     <?php include_once(dirname(__DIR__).'/block/head.php');?>
-<style type="text/css">
-	table.tableizer-table {
-	border: 1px solid #CCC; font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
-    } 
-    .tableizer-table td {
-	padding: 4px;
-	margin: 3px;
-	border: 1px solid #ccc;
-    }
-    .tableizer-table th {
-	background-color: #104E8B; 
-	color: #FFF;
-	font-weight: bold;
-}
-
-</style>
 </head>
 
 <body>
@@ -54,7 +37,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <?php include_once(dirname(__DIR__).'/block/navbar-light.php');?>
 
 <div id="mainAlert" data-alert class="alert-box <?php echo $type_message; ?>" tabindex="0" aria-live="assertive" role="dialogalert">
-        <p id="message" class=Comic"><?php echo $message;?></p>
+        <p id="message" style="font-size:1.6em;"><?php echo $message;?></p>
        <button href="#" tabindex="0" class="close" aria-label="Close Alert">&times;</button>
 </div>
 
@@ -64,6 +47,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
         <p class='text'>Je soussigné l'entreprise <b><?php echo $identiteEntreprise['RaisonSocial'] ? :"Mon entreprise" ; ?></b>, 
             demeurant à l'adresse <b> <?php echo $identiteEntreprise['AdresseRue'] ? :"Mon adresse" . " , " . $identiteEntreprise['AdresseCodePostale'] ? :"Mon code postal"; ?></b> 
             atteste sur l'honneur </p>
+        <br />
         <form>
          <div class="row">    
           <div class="large-6 columns">
@@ -88,7 +72,6 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
     </div>    
 </section>
 
-  
 <!-- Chargement du bloc Partenaires -->
 <?php include_once(dirname(__DIR__).'/block/footer.php');?>
 
@@ -130,7 +113,5 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
         });
     });
   </script>
-  
-
 </body>
 </html>

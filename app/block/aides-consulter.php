@@ -37,23 +37,23 @@
  </li>
 
  <li data-id="Etape-02" data-button="Suivant" data-prev-text="Précedent" data-options="tip_location:left;scroll_animation:swing;tip_animation:fade;">
-     <h4>Demande en cours</h4>
+     <h4>mes demandes en cours</h4>
      <p>Affiche toutes les demandes dont le statut est à : Programmé et Payé</p>  
      <p>pour chaque dossier les informations suivantes sont affichées :</p>
      <p> - La localisation du projet,</p>
-     <p> - Les référence du projet,</p>
-     <p> - le statut de la demande,</p>
+     <p> - Les références du projet,</p>
      <p> - le statut de la demande,</p>
      <p> - les données financières,</p>
  </li>
 
-  <li data-id="Etape-03" data-button="Suivant" data-prev-text="Précedent" data-options="tip_location:left;scroll_animation:swing;tip_animation:fade;">
-     <h4>Statistiques</h4>
-     <p>Affiche des données de suivi statistiques sur les demandes d'aides.</p>  
+  <li data-id="Etape-03" data-button="Suivant" data-prev-text="Précedent" data-options="tip_location:bottom;scroll_animation:swing;tip_animation:fade;">
+     <h4>mes statistiques</h4>
+     <p>Affiche le cumul des montants par cofinanceur du plan de financement et des dépenses réalisées.</p>  
+     <p>Affiche sous la forme de graphique la répartition et la couverture de cofinancements.</p>
  </li>
 
-  <li data-id="Etape-04" data-button="Suivant" data-prev-text="Précedent" data-options="tip_location:left;scroll_animation:swing;tip_animation:fade;">
-     <h4>Historique</h4>
+  <li data-id="Etape-04" data-button="Suivant" data-prev-text="Précedent" data-options="tip_location:bottom;scroll_animation:swing;tip_animation:fade;">
+     <h4>mon Histoire</h4>
      <p>Affiche pour chaque dossier (déprogrammé, annulé, programmé, certifié...) :</p>
      <p> - Le type de fonds ou de programme,</p>
      <p> - Le montant global du projet,</p>

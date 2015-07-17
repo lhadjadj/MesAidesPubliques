@@ -30,6 +30,7 @@
                       http://www.gratisography.com/
                       https://picjumbo.com/
    Email-Protection : http://www.mailtoencoder.com/
+   Color			: http://www.color-hex.com/
 			
 /* SITE */
 	Last update: 2015/06/19

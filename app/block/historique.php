@@ -8,11 +8,11 @@ if (isset($_POST['siret']) && isset($_POST['email']))
     setlocale(LC_MONETARY, 'fr_FR.utf8');
 ?>
 
-<h2>Historique <strong><?php echo $historiqueEntreprise->count();?></strong> dossier(s), dont <?php echo $historiqueDossierAnnule->count();?> abandonné(s)</h2>
+<h2 id="Etape-04">Historique <strong><?php echo $historiqueEntreprise->count();?></strong> dossier(s), dont <?php echo $historiqueDossierAnnule->count();?> abandonné(s)</h2>
 
 <?php
 if(!empty($historiqueEntreprise)) { ?>
-<ul id="listProjet" class="accordion"  data-accordion>
+<ul id="listProjet" class="accordion" data-accordion>
  <?php
   foreach($historiqueEntreprise as $numProjet => $projet):?>
     <li class="accordion-navigation">
@@ -60,18 +60,11 @@ if(!empty($historiqueEntreprise)) { ?>
              </div>
            </div>
           </div>
+          </div>
         </div>
-      </div>
+       </div>
     </li>
  <?php endforeach;?>
- </ul>
+</ul>
 <?php } else { echo "Aucun historique disponible"; } ?>
-
-
-<!--EtatStatus: 'Abandonné / Déprogrammé'
-    EtatStatus: 'Programmé'
-    EtatStatus: 'Refusé en comité'
-    EtatStatus: 'Proposé comité'
-    EtatStatus: 'Déposé' 
--->
 

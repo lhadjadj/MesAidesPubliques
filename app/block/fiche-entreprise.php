@@ -196,4 +196,3 @@ if (isset($_POST['siret']) && isset($_POST['email']))
     </div>
 </div>
 
-</div>
