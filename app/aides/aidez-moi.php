@@ -1,9 +1,10 @@
 <?php
 $titre_page = "Mes Aides publiques - Aidez-moi";
-$url_canonical = "/app/aides/aidez-mmoi.php";
+$url_canonical = "/app/aides/aidez-moi.php";
 $description="Aidez-moi à utiliser Mes Aides Publiques";
 $twitter_domain="En savoir plus sur Mes Aides Publiques";
 $twitter_description="Mes Aides Publiques est un télé-service de simplication administrative.";
+$aides="Introdution";
 ?>
 
 <!DOCTYPE html>
@@ -23,9 +24,102 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
 <![endif]-->
 <?php include_once(dirname(__DIR__).'/block/navbar-light.php');?>
 
- <article class="row">
- 
- </article>     
+<section>
+    <article class="row" id="Introduction">
+        <h1>Introdution</h1>
+        <p class="text">
+            Une Chèvre, un Mouton, avec un Cochon gras,
+Montés sur même char s’en allaient à la foire :
+Leur divertissement ne les y portait pas ;
+On s’en allait les vendre, à ce que dit l’histoire : 
+Le Charton (1) n’avait pas dessein
+De les mener voir Tabarin.(2)
+Dom Pourceau criait en chemin
+Comme s’il avait eu cent Bouchers à ses trousses.
+C’était une clameur à rendre les gens sourds
+Les autres animaux, créatures plus douces,
+Bonnes gens, s’étonnaient qu’il criât au secours ; 
+Ils ne voyaient nul mal à craindre.
+Le Charton dit au Porc : Qu’as-tu tant à te plaindre ?
+Tu nous étourdis tous, que ne te tiens-tu coi ?
+Ces deux personnes-ci plus honnêtes que toi,
+Devraient t’apprendre à vivre, ou du moins à te taire.
+Regarde ce Mouton ; a-t-il dit un seul mot ?
+Il est sage. Il est un sot,
+Repartit le Cochon : s’il savait son affaire,
+Il crierait comme moi, du haut de son gosier, 
+Et cette autre personne honnête (3)
+Crierait tout du haut de sa tête.
+Ils pensent qu’on les veut seulement décharger,
+La Chèvre de son lait, le Mouton de sa laine.
+Je ne sais pas s’ils ont raison ;
+Mais quant à moi qui ne suis bon
+Qu’à manger, ma mort est certaine.
+Adieu mon toit (4) et ma maison.
+Dom Pourceau raisonnait en subtil personnage :
+Mais que lui servait-il ? Quand le mal est certain,
+La plainte ni la peur ne changent le destin ;
+Et le moins prévoyant est toujours le plus sage.
+
+        </p>
+    </article>     
+    <article class="row" id="Consulter">
+        <h1>Consulter mes dossiers</h1>
+    </article>     
+    <article class="row" id="Simuler">
+        <h1>Simuler la règle du <em>Minimis</em></h1>
+    </article>     
+    <article class="row" id="Declarer">
+        <h1>Déclaration de conformité des données</h1>
+    </article>     
+    <article class="row" id="Rechercher">
+        <h1>Rechercher une informations sur un dossier</h1>
+    </article>     
+    <article class="row" id="Mentions-Legales">
+        <h1>A propos des mentions légales</h1>
+        <p class="text">Le phaéton (1) d'une voiture à foin
+Vit son char embourbé. Le pauvre homme était loin
+De tout humain secours. C'était à la campagne
+Près d'un certain canton de la basse Bretagne,
+              Appelé Quimper-Corentin. (2)
+              On sait assez que le Destin
+Adresse là les gens quand il veut qu'on enrage :
+              Dieu nous préserve du voyage ! (3)
+Pour venir au Chartier embourbé dans ces lieux,
+Le voilà qui déteste et jure de son mieux,
+              Pestant, en sa fureur extrême,
+Tantôt contre les trous, puis contre ses Chevaux,
+              Contre son char, contre lui même.
+Il invoque à la fin le Dieu dont les travaux
+              Sont si célèbres dans le monde :
+Hercule, lui dit-il, aide-moi ; si ton dos
+              A porté la machine ronde,
+              Ton bras peut me tirer d'ici
+Sa prière étant faite, il entend dans la nue
+              Une voix qui lui parle ainsi :
+              Hercule veut qu'on se remue,
+Puis il aide les gens. Regarde d'où provient
+              L'achoppement qui te retient.
+              Ôte d'autour de chaque roue
+Ce malheureux mortier, cette maudite boue
+              Qui jusqu'à l'essieu les enduit.
+Prends ton pic, et me romps ce caillou qui te nuit.
+Comble-moi cette ornière. As-tu fait ? Oui, dit l'homme.
+Or bien je vas t'aider, dit la voix : prends ton fouet.
+Je l'ai pris. Qu'est ceci ? mon char marche à souhait.
+Hercule en soit loué. Lors la voix : Tu vois comme
+Tes Chevaux aisément se sont tirés de là.
+               Aide-toi, le Ciel t'aidera.
+
+ </p>
+    </article>     
+    <article class="row" id="Conditions-Generales">
+        <h1>A propos des conditions générales</h1>
+    </article>     
+    <article class="row" id="Cookies">
+        <h1>A propos des cookies</h1>
+    </article>     
+</section>
  
 <!-- Chargement du bloc Partenaires -->
  <?php include_once(dirname(__DIR__).'/block/footer.php');?>
@@ -43,7 +137,6 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
     
     $(document).ready(function () {
         var taille = 1.4;
-        var augmentation = 0.1;
         var tailleMax = 2.5;
         var tailleMin = 1.2;
         $('#Agrandir').click(function () {

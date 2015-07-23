@@ -7,6 +7,7 @@ $url_canonical = "/app/consulter/consulter.php";
 $description = "Consulter mes Aides Publiques";
 $twitter_domain = "En savoir plus sur mes aides";
 $twitter_description = "Mes Aides Publiques est un télé-service de simplication administrative";
+$aides="Consulter";
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>

@@ -26,7 +26,10 @@ $command='mongoimport '
 // Initialisation de la connexion
 $m = new MongoClient();
 $nbdossiers=$m->DataSource->Dossiers->count();
-if ($nbdossiers === 0) {exec($command);} 
+if ($nbdossiers === 0) {
+    exec($command);
+    $m->DataSource->Dossiers->createIndexarray(array('$**' => "text")); 
+    } 
 $nbdossiers=$m->DataSource->Dossiers->count();
 return $nbdossiers;
 }

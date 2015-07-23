@@ -5,6 +5,7 @@ $url_canonical = "/app/cookies/miam-miam.php";
 $description="A propos des cookies utilisés par Mes Aides Publiques";
 $twitter_domain="En savoir plus sur les cookies utilisées sur Mes Aides Publiques";
 $twitter_description="Mes Aides Publiques est un télé-service de simplication administrative";
+$aides="Cookies";
 ?>
 
 <!DOCTYPE html>

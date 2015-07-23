@@ -5,6 +5,7 @@ $url_canonical = "/app/conditions-générales/conditions-générales.php";
 $description="Consulter les Conditions Générales";
 $twitter_domain="En savoir plus sur les Conditions Générales";
 $twitter_description="Mes Aides Publiques est un télé-service de simplication administrative.";
+$aides="Conditions-Generales";
 ?>
 
 <!DOCTYPE html>

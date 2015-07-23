@@ -511,12 +511,12 @@ else
 function SimulerMinimis($NumeroSiret)
 {
 $m = new MongoClient();
-//if ($_SESSION['hackathon'] == 0) 
-//   {
+if ($_SESSION['hackathon'] == 0) 
+   {
     //todo
-//    return;
-//    }
-//else
+    return;
+    }
+else
    //{
     $c = $m->selectDB("DataSource")->selectCollection("Dossiers");
         
@@ -595,5 +595,22 @@ $m = new MongoClient();
                  "RqTotalAidesEtatAutrePublic" => $RqTotalAidesEtatAutrePublic
                 ));
    
-//   }
+ }
+
+ 
+function Rechercher($NumeroSiret,$Recherche)
+{
+// 23/07/2015
+// La fonction de recherche Fuul-text ne fonctionne pas malgré la mise ) à jour du drivers 1.6.10 et du moteur de base de données 3.0.4
+// Pour contouner le problème on utilise l'évaluation de la requete depuis le shell du moteur MongoDB.
+// Il retourne un resultat sous la forme d'un fichier Json, mais celui si n'est pas bien formé.
+// il est donc necessaire de retarvaillé le tableau, puis d'utiliser des pointeurs pour se déplacer dans la structure.
+    
+$maRecherche = exec('mongo DataSource --eval \'db.Dossiers.find({NumeroSiret: "S' .$NumeroSiret .'", $text: { $search: "' .$Recherche . '" }},{ score: { $meta: "textScore" }}).sort ({score:{$meta:"textScore"}}).limit(10).forEach(function(x){printjson(x);})\'', $resultat);
+$NombreLigne=count($resultat);
+for ($nombre_de_lignes = 1; $nombre_de_lignes <= $NombreLigne; $nombre_de_lignes++)
+{
+    exec('echo ' . $resultat[$nombre_de_lignes] . '| cut -f 2 -d :', $cut); 
+}
+return $cut;
 }

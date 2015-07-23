@@ -15,10 +15,11 @@ else
    }
 
 $titre_page = "Mes Aides publiques - Simuler votre Eligibilité à la régle du Minimis";
-$url_canonical = "/app/simuler/siimuler.php";
+$url_canonical = "/app/simuler/simuler.php";
 $description="Simuler votre Eligibilité à la régle du Minimis";
 $twitter_domain="En savoir plus sur la régle des Minims";
 $twitter_description="Mes Aides Publiques est un télé-service de simplication administrative";
+$aides="Simuler";
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>

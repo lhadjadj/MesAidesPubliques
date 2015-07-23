@@ -10,14 +10,16 @@
             <!-- Left Nav Section -->
             <ul class="left hide-for-medium-down">
                 <li class="has-form">
-                    <div class="row collapse">
+                    <form Method="POST" action="/app/rechercher/rechercher.php">
+                    <div class="row collapse postfix-round">
                         <div class="large-8 small-9 columns">
-                            <input type="text" name="rechercher" id="rechercher" placeholder="Dossier, Aides,...">
+                            <input type="text" name="recherche" id="rechercher" placeholder="Dossier, Aides,...">
                         </div>
                         <div class="large-4 small-3 columns">
-                            <a id="Nav-01" href="#" class="alert button expand">Rechercher</a>
+                            <input id="Nav-01" type="submit" value="Rechercher" class="alert button postfix" style="line-height:1rem;;">
                         </div>
                     </div>
+                  </form>
                 </li>
                 <li class="divider"></li>
                 <li><a><span id="Agrandir" class="DensiaSans" title="Agrandir la police (CTRL+)"><b>+t</b></span></a> </li>

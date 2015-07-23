@@ -5,6 +5,7 @@ $url_canonical = "/app/mentions-legales/mentions-legales.php";
 $description="Consulter les mentions légales";
 $twitter_domain="En savoir plus sur les mentions légales";
 $twitter_description="Mes Aides Publiques est un télé-service de simplication administrative.";
+$aides="Mentions-Legales";
 ?>
 
 <!DOCTYPE html>

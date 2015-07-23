@@ -15,7 +15,7 @@
       <li class="divider"></li>
       <li><a id="Nav-03"  href="/app/declarer/declarer.php">Déclarer</a></li>
       <li class="divider"></li>
-      <li><a href="/app/aides/aidez-moi.php">Aidez-moi</a></li>
+      <li><a href="/app/aides/aidez-moi.php#<?php echo $aides ?>">Aidez-moi</a></li>
       <li class="divider"></li>
       <li class="has-form">
           <a href="#" data-reveal-id="quitter" class="button" role="button">Quitter</a>

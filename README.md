@@ -45,6 +45,20 @@ Configuration :
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+Version 1.3.1 - 23 juillet 2015
+Evolutions :
+- Ajout des info-bulles sur le tableau de synthèse BNF
+- Ajout des fonctionnalités de recherche (Mongo Text Search) et mise en place des indexes
+- Mise à jour de l'aide globales
+	- création du sommaire de l'aide
+	- ajout des indexes pour chaque page (href)
+
+Corrections :
+-  Correction sur la page Declarer.php, le message peu être supprime en cliquant sur la croix.
+
+Anomalie :
+- Problème de numero de Siret en session persistent.
+
 Version 1.3.0 - 17 juillet 2015
 Evolutions :
 - Remplacement de la librairie Pizza par ChartJs
