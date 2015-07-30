@@ -63,7 +63,7 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
         <div id="Reduire" class="DensiaSans" title="Diminuer la police (CTRL-)"><b>-t</b></div>
     </div>
     <div class="small-8 medium-3 large-2 columns" id="numero1">
-        <figure class="pub_responsive"><img src="/img/Logo/responsive.png" alt="je suis responsive" title="Je suis responsive."/></figure>
+        <figure class="pub_responsive"><img src="/img/Icone/web.png" alt="je suis responsive" title="Je suis responsive."/></figure>
         <figure class="pub_rgaa"><img src="/img/Logo/logo_e_accessible.jpg" alt="je suis rgaa" title="Je suis conforme RGAA 1*."/></figure>
         <figure class="pub_doc">
             <a data-tooltip aria-haspopup="true" 
@@ -72,6 +72,13 @@ $twitter_description="Mes Aides Publiques est un télé-service de simplication 
                title="Cliquez sur moi, pour commencer la visite guidée." 
                id="aidezmoi">
                <img src="/img/Icone/docteur.png" alt="Guide" />
+            </a>
+        </figure>
+        <figure class="pub_pdf">
+            <a href="/app/block/imprime.php?nom=<?php echo $url_canonical; ?>"
+               title="Imprimez la page." 
+               id="imprime">
+               <img id="pdf" src="/img/Icone/pdf.png" alt="Impression PDF"/>
             </a>
         </figure>
     </div>

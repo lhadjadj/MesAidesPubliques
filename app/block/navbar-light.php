@@ -35,6 +35,7 @@
         <li><a><span id="Reduire" class="DensiaSans" title="Diminuer la police (CTRL-)"><b>-t</b></span> </a>  </li>
         <li class="divider"></li>
         <li><a id="aidezmoi" class="DensiaSans" title="Commencer la visite guidée"><strong>?</strong></a></li>
+        <li><a id="imprime" class="DensiaSans" href="/app/block/imprime.php?nom=<?php echo $url_canonical; ?>" title="Imprimez la page."><strong>PDF</strong></a>
     </ul>
   </section>
 </nav>

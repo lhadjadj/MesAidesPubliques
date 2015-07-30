@@ -103,12 +103,16 @@ $aides="Mentions-Legales";
  </article>
 <?php include_once(dirname(__DIR__).'/block/footer.php');?>
 
+<!-- Chargement de l'aide en ligne -->
+<?php include_once(dirname(__DIR__).'/block/aides-mentions-legales.php');?>
+
 
 <script src="/js/vendor/jquery.js?ver=2.1.4"></script>
 <script src="/js/foundation/foundation.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.topbar.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.reveal.js?ver=5.5.2"></script>
 <script src="/js/foundation/foundation.tooltip.js?ver=5.5.2"></script>
+<script src="/js/foundation/foundation.joyride.js?ver=5.5.2"></script>
 <script src="/js/vendor/toucheffects.js"></script>
 
 <script type="text/javascript">

@@ -19,6 +19,7 @@
     .pub_responsive img {display: block; margin-left: auto; margin-right: auto; width:100px;} 
     .pub_rgaa img {display:block; margin-left: auto; margin-right: auto; width:100px; margin-top: -10px} 
     .pub_doc img {display:block; margin-left: auto; margin-right: auto; width:35px;  margin: -75px 0px 0px -35px;}
+    .pub_pdf img {display:block; margin-left: auto; margin-right: auto; width:35px;  margin: -60px 0px 0px -75px;}
     .aps img {width:100px;}
     .map {width:400px; height:380px; margin-left:0px;}
 }
@@ -28,9 +29,10 @@
     #Reduire {font-size: 1.5em;} 
     .boutonFC {margin:0.4em 3em 0em 0em;}
     .about img {width:150px; height:150px; border-radius:150px; -webkit-border-radius:150px; -moz-border-radius:150px;} 
-    .pub_responsive img {display: block; margin-left: auto; margin-right: auto; width:70px;} 
+    .pub_responsive img {display: block; margin-left: auto; margin-right: auto; width:60px;} 
     .pub_rgaa img {display:block; margin-left: auto; margin-right: auto; width:70px; margin-top: -10px} 
     .pub_doc img {display:block; margin-left: auto; margin-right: auto; width:35px;  margin: -75px 0px 0px -35px;}
+    .pub_pdf img {display:block; margin-left: auto; margin-right: auto; width:35px;  margin: -60px 0px 0px -75px;}
     .aps img {width:100px;}
     .map {width:500px; height:380px; margin-left:40px;}
 }
@@ -44,6 +46,7 @@
     .pub_responsive img {display: block; margin-left: auto; margin-right: auto;} 
     .pub_rgaa img {display:block; margin-left: auto; margin-right: auto; margin-top: -10px} 
     .pub_doc img {display:block; margin-left: auto; margin-right: auto; width:35px; margin: -75px 0px 0px -35px;}
+    .pub_pdf img {display:block; margin-left: auto; margin-right: auto; width:35px; margin: -60px 0px 0px -75px;}
     .aps img {width:100px;}
     .map {width:500px; height:380px; margin-left:175px;}
 } 
@@ -54,9 +57,10 @@
     .boutonFC {margin:0.4em 3em 0em 0em;} 
     .buttonA {margin-top: 0.5em;}
     .about img {width:200px;height:200px;border-radius:150px;-webkit-border-radius:150px;-moz-border-radius:150px;} 
-    .pub_responsive img {display: block; margin-left: auto; margin-right: auto; width:70px;} 
+    .pub_responsive img {display: block; margin-left: auto; margin-right: auto; width:60px;} 
     .pub_rgaa img {display:block; margin-left: auto; margin-right: auto; width:70px; margin-top: -10px} 
     .pub_doc img {display:block; margin-left: auto; margin-right: auto; width:35px;  margin: -75px 0px 0px -35px;}
+    .pub_pdf img {display:block; margin-left: auto; margin-right: auto; width:35px;  margin: -75px 0px 0px -35px;}
     .aps img {width:70px;}
     .map {width:500px; height:380px; margin-left:185px;}
 }
@@ -66,9 +70,10 @@
     .boutonFC {margin:0.4em 3em 0em 0em;} 
     .buttonA {margin-top: 0.5em;}
     .about img {width:200px;height:200px;border-radius:150px;-webkit-border-radius:150px;-moz-border-radius:150px;} 
-    .pub_responsive img {display: block; margin-left: auto; margin-right: auto; width:70px;} 
+    .pub_responsive img {display: block; margin-left: auto; margin-right: auto; width:60px;} 
     .pub_rgaa img {display:block; margin-left: auto; margin-right: auto; width:70px; margin-top: -10px} 
     .pub_doc img {display:block; margin-left: auto; margin-right: auto; width:35px; margin: -75px 0px 0px -35px;}
+    .pub_pdf img {display:block; margin-left: auto; margin-right: auto; width:35px; margin: -60px 0px 0px -75px;}
     .aps img {width:100px;}
     .map {width:500px; height:380px; margin-left:225px;}
 }
@@ -78,9 +83,10 @@
     .boutonFC {margin:0.4em 3em 0em 0em;} 
     .buttonA {margin-top: 0.5em;}
     .about img {width:200px; height:200px; border-radius:150px; -webkit-border-radius:150px; -moz-border-radius:150px;} 
-    .pub_responsive img {display: block; margin-left: auto; margin-right: auto; width:75px;} 
+    .pub_responsive img {display: block; margin-left: auto; margin-right: auto; width:65px;} 
     .pub_rgaa img {display:block; margin-left: auto; margin-right: auto; width:78px; margin-top: -10px} 
     .pub_doc img {display:block; margin-left: auto; margin-right: auto; width:35px;  margin: -75px 0px 0px -35px;}
+    .pub_pdf img {display:block; margin-left: auto; margin-right: auto; width:35px;  margin: -60px 0px 0px -75px;}
     .aps img {width:100px;}
     .map {width:500px; height:380px; margin-left:185px;}
 } 
@@ -91,6 +97,7 @@
     .pub_responsive img {width:75px;} 
     .pub_rgaa img {width:78px;}
     .aps img {width:100px;}
+    .pub_pdf img {display:block; margin-left: auto; margin-right: auto; width:35px;  margin: -60px 0px 0px -75px;}
     .map {width:500px; height:380px; margin-left:225px;}
 } 
 

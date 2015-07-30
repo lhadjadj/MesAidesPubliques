@@ -15,7 +15,7 @@ Configuration de la plateforme de développement :
 - nginx 1.6.2.5
 - PHP 5.6.9
 - PHP-Mongo Driver 1.6.10
-- mongoDB 2.4.10
+- mongoDB 3.0.4
  
 Technologies
 - HTML 5/CSS 3
@@ -43,7 +43,19 @@ Configuration :
 	- un fichier de paramétrage est utilisé pour stocker le numéro de version et les paarmétres de connexions à OpenDataSoft, APS et GoogleMap API
 
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Version 1.3.2 - 30 juillet 2015
+Evolutions :
+- Ajout de la fonction Imprimez
+- Remplacement de l'icone Responsive par une Icone Flat de couleur #005577
+- Ajout des guides pour les pages utilisants le block nav-bar-light (sans le moteur de recherche).
+
+Corrections :
+
+Anomalie :
+- Problème de numero de Siret en session persistent.
+
 
 Version 1.3.1 - 23 juillet 2015
 Evolutions :

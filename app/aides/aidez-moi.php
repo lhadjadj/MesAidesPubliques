@@ -27,44 +27,94 @@ $aides="Introdution";
 <section>
     <article class="row" id="Introduction">
         <h1>Introdution</h1>
-        <p class="text">
-            Une Chèvre, un Mouton, avec un Cochon gras,
-Montés sur même char s’en allaient à la foire :
-Leur divertissement ne les y portait pas ;
-On s’en allait les vendre, à ce que dit l’histoire : 
-Le Charton (1) n’avait pas dessein
-De les mener voir Tabarin.(2)
-Dom Pourceau criait en chemin
-Comme s’il avait eu cent Bouchers à ses trousses.
-C’était une clameur à rendre les gens sourds
-Les autres animaux, créatures plus douces,
-Bonnes gens, s’étonnaient qu’il criât au secours ; 
-Ils ne voyaient nul mal à craindre.
-Le Charton dit au Porc : Qu’as-tu tant à te plaindre ?
-Tu nous étourdis tous, que ne te tiens-tu coi ?
-Ces deux personnes-ci plus honnêtes que toi,
-Devraient t’apprendre à vivre, ou du moins à te taire.
-Regarde ce Mouton ; a-t-il dit un seul mot ?
-Il est sage. Il est un sot,
-Repartit le Cochon : s’il savait son affaire,
-Il crierait comme moi, du haut de son gosier, 
-Et cette autre personne honnête (3)
-Crierait tout du haut de sa tête.
-Ils pensent qu’on les veut seulement décharger,
-La Chèvre de son lait, le Mouton de sa laine.
-Je ne sais pas s’ils ont raison ;
-Mais quant à moi qui ne suis bon
-Qu’à manger, ma mort est certaine.
-Adieu mon toit (4) et ma maison.
-Dom Pourceau raisonnait en subtil personnage :
-Mais que lui servait-il ? Quand le mal est certain,
-La plainte ni la peur ne changent le destin ;
-Et le moins prévoyant est toujours le plus sage.
-
-        </p>
+        <h3>Mes aides publiques - Projet <em>Minimis</em>, mais fait le <em>maximum</em></h3>
+        <h4>C'est une équipe avant tout</h4>
+        <div class="small-12 medium-12 large-12 columns">
+            <div class="small-2 medium-4 large-4" >
+                <figure>
+                    <img src="/img/Pins/J_ai_un_super_pouvoir.png" alt="j'ai un super pouvoir" title="J'ai un super Pouvoir - Chef du Projet"/>
+                </figure>
+            </div>
+            <div class="small-10 medium-8 large-8" >
+                <p class="text">ASP - Laurent HADJADJ</p>
+            </div>
+            <div class="small-2 medium-4 large-4" >
+                <figure>
+                    <img src="/img/Pins/Je_suis_un_super_poteur_didee.png" alt="je suis un super porteur d'idées" title="Je suis porteur d'idées - Mes Aides Publiques"/>
+                </figure>
+            </div>
+            <div class="small-10 medium-8 large-8" >
+                <p class="text">ASP - Laurent HADJADJ</p>
+                <p class="text">SGMAP - Philippe VRIGNAUT</p>
+            </div>
+            <div class="small-2 medium-4 large-4" >
+                <figure>
+                    <img src="/img/Pins/Je_suis_un_super_designer.png" alt="je suis un super designer" title="Je suis un super designer - Responsive Web"/>
+                </figure>
+            </div>
+            <div class="small-10 medium-8 large-8" >
+                <p class="text">ASP - Laurent HADJADJ</p>
+            </div>
+            <div class="small-2 medium-4 large-4" >
+                <figure>
+                    <img src="/img/Pins/Je_suis_un_super_developpeur.png" alt="je suis un super développeur" title="Je suis un super developpeur - HTML5/CSS - PHP/Foundation"/>
+                </figure>
+            </div>
+            <div class="small-10 medium-8 large-8" >
+                <p class="text">ASP - Laurent HADJADJ</p>
+                <p class="text">Atexo - Gregory</p>
+            </div>
+            <div class="small-2 medium-4 large-4" >
+                <figure>
+                    <img src="/img/Pins/Je_suis_un_super_mentor.png" alt="je suis un super mentor" title="Je suis un super mentor"/>
+                </figure>
+            </div>
+            <div class="small-10 medium-8 large-8" >
+                <p class="text">SGMAP - Philippe VRIGNAUT</p>
+                <p class="text">ASP - Laurent HADJADJ</p>
+                <p class="text">FAM - Bernard DUFRAISSE</p>
+                <p class="text">BNF - Cecile</p>
+            </div>
+        </div>
+           
     </article>     
     <article class="row" id="Consulter">
         <h1>Consulter mes dossiers</h1>
+        <p class="text">
+            Une Chèvre, un Mouton, avec un Cochon gras,<br />
+            Montés sur même char s’en allaient à la foire :<br />
+            Leur divertissement ne les y portait pas ;<br />
+            On s’en allait les vendre, à ce que dit l’histoire :<br />
+            Le Charton (1) n’avait pas dessein<br />
+            De les mener voir Tabarin.<br />
+            Dom Pourceau criait en chemin<br />
+            Comme s’il avait eu cent Bouchers à ses trousses.<br />
+            C’était une clameur à rendre les gens sourds<br />
+            Les autres animaux, créatures plus douces,<br />
+            Bonnes gens, s’étonnaient qu’il criât au secours ;<br />
+            Ils ne voyaient nul mal à craindre.,<br />
+            Le Charton dit au Porc : Qu’as-tu tant à te plaindre ?<br />
+            Tu nous étourdis tous, que ne te tiens-tu coi ?<br />
+            Ces deux personnes-ci plus honnêtes que toi,<br />
+            Devraient t’apprendre à vivre, ou du moins à te taire.<br />
+            Regarde ce Mouton ; a-t-il dit un seul mot ?<br />
+            Il est sage. Il est un sot,<br />
+            Repartit le Cochon : s’il savait son affaire,<br />
+            Il crierait comme moi, du haut de son gosier,<br />
+            Et cette autre personne honnête<br />
+            Crierait tout du haut de sa tête.<br />
+            Ils pensent qu’on les veut seulement décharger,<br />
+            La Chèvre de son lait, le Mouton de sa laine.<br />
+            Je ne sais pas s’ils ont raison ;<br />
+            Mais quant à moi qui ne suis bon<br />
+            Qu’à manger, ma mort est certaine.<br />
+            Adieu mon toit (4) et ma maison.<br />
+            Dom Pourceau raisonnait en subtil personnage :<br />
+            Mais que lui servait-il ? Quand le mal est certain,<br />
+            La plainte ni la peur ne changent le destin ;<br />
+            Et le moins prévoyant est toujours le plus sage.<br />
+        </p>
+
     </article>     
     <article class="row" id="Simuler">
         <h1>Simuler la règle du <em>Minimis</em></h1>
@@ -77,41 +127,40 @@ Et le moins prévoyant est toujours le plus sage.
     </article>     
     <article class="row" id="Mentions-Legales">
         <h1>A propos des mentions légales</h1>
-        <p class="text">Le phaéton (1) d'une voiture à foin
-Vit son char embourbé. Le pauvre homme était loin
-De tout humain secours. C'était à la campagne
-Près d'un certain canton de la basse Bretagne,
-              Appelé Quimper-Corentin. (2)
-              On sait assez que le Destin
-Adresse là les gens quand il veut qu'on enrage :
-              Dieu nous préserve du voyage ! (3)
-Pour venir au Chartier embourbé dans ces lieux,
-Le voilà qui déteste et jure de son mieux,
-              Pestant, en sa fureur extrême,
-Tantôt contre les trous, puis contre ses Chevaux,
-              Contre son char, contre lui même.
-Il invoque à la fin le Dieu dont les travaux
-              Sont si célèbres dans le monde :
-Hercule, lui dit-il, aide-moi ; si ton dos
-              A porté la machine ronde,
-              Ton bras peut me tirer d'ici
-Sa prière étant faite, il entend dans la nue
-              Une voix qui lui parle ainsi :
-              Hercule veut qu'on se remue,
-Puis il aide les gens. Regarde d'où provient
-              L'achoppement qui te retient.
-              Ôte d'autour de chaque roue
-Ce malheureux mortier, cette maudite boue
-              Qui jusqu'à l'essieu les enduit.
-Prends ton pic, et me romps ce caillou qui te nuit.
-Comble-moi cette ornière. As-tu fait ? Oui, dit l'homme.
-Or bien je vas t'aider, dit la voix : prends ton fouet.
-Je l'ai pris. Qu'est ceci ? mon char marche à souhait.
-Hercule en soit loué. Lors la voix : Tu vois comme
-Tes Chevaux aisément se sont tirés de là.
-               Aide-toi, le Ciel t'aidera.
-
- </p>
+        <p class="text">Le phaéton d'une voiture à foin<br />
+                Vit son char embourbé. Le pauvre homme était loin<br />
+                De tout humain secours. C'était à la campagne<br />
+                Près d'un certain canton de la basse Bretagne<br />
+                Appelé Quimper-Corentin.<br />
+                On sait assez que le Destin<br />
+                Adresse là les gens quand il veut qu'on enrage :<br />
+                Dieu nous préserve du voyage ! <br />
+                Pour venir au Chartier embourbé dans ces lieux,<br />
+                Le voilà qui déteste et jure de son mieux,<br />
+                Pestant, en sa fureur extrême,<br />
+                Tantôt contre les trous, puis contre ses Chevaux,<br />
+                Contre son char, contre lui même.<br />
+                Il invoque à la fin le Dieu dont les travaux<br />
+                Sont si célèbres dans le monde :<br />
+                Hercule, lui dit-il, aide-moi ; si ton dos<br />
+                A porté la machine ronde,<br />
+                Ton bras peut me tirer d'ici<br />
+                Sa prière étant faite, il entend dans la nue<br />
+                Une voix qui lui parle ainsi :<br />
+                Hercule veut qu'on se remue,<br />
+                Puis il aide les gens. Regarde d'où provient<br />
+                L'achoppement qui te retient.<br />
+                Ôte d'autour de chaque roue<br />
+                Ce malheureux mortier, cette maudite boue<br />
+                Qui jusqu'à l'essieu les enduit.<br />
+                Prends ton pic, et me romps ce caillou qui te nuit.<br />
+                Comble-moi cette ornière. As-tu fait ? Oui, dit l'homme.<br />
+                Or bien je vas t'aider, dit la voix : prends ton fouet.<br />
+                Je l'ai pris. Qu'est ceci ? mon char marche à souhait.<br />
+                Hercule en soit loué. Lors la voix : Tu vois comme<br />
+                Tes Chevaux aisément se sont tirés de là.<br />
+                Aide-toi, le Ciel t'aidera.
+         </p>
     </article>     
     <article class="row" id="Conditions-Generales">
         <h1>A propos des conditions générales</h1>
